@@ -159,7 +159,7 @@ footer strong{color:var(--blanco)}
 <section class="hero">
   <div class="hero-eyebrow">
     <span class="live-dot"></span>
-    New picks added automatically
+    <span class="label">New picks added automatically</span>
   </div>
 
   <h1>Find the best<br><em>anything</em> to buy</h1>
@@ -301,11 +301,153 @@ footer strong{color:var(--blanco)}
 </footer>
 
 <script>
-function doSearch(){
-  const q = document.getElementById('searchInput').value.trim()
-  if(q) window.location.href = '/best-' + q.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') + '/'
+// ── Detección de idioma y adaptación automática ───────────────────────────
+const LANGS = {
+  es: {
+    eyebrow: 'Nuevos picks actualizados automáticamente',
+    h1a: 'Encuentra lo mejor para',
+    h1b: 'comprar',
+    sub: 'Picks reales de compradores reales. Sin patrocinios, sin relleno. Solo el producto que de verdad funciona.',
+    placeholder: '¿Qué buscas? ej: aspiradora robot, protector solar…',
+    browse: 'Explorar por categoría',
+    featured: 'Picks destacados',
+    scanning: 'Escaneando ahora',
+    soon: 'Más picks pronto',
+    soonSub: 'El radar corre cada 3 horas. Los productos nuevos aparecen aquí automáticamente.',
+    beautyLoading: 'Picks de belleza cargando…',
+    beautySub: 'r/SkincareAddiction · r/MakeupAddiction siendo escaneados.',
+    prefix: '/es',
+    cats: ['🍳 Cocina','✨ Belleza','🖱 Tech','🏕 Exterior','🐾 Mascotas','🚗 Autos','🏠 Hogar','👟 Moda'],
+    disclosure: 'Divulgación de afiliados: ganamos una pequeña comisión sin costo extra para ti.',
+  },
+  pt: {
+    eyebrow: 'Novos picks adicionados automaticamente',
+    h1a: 'Encontre o melhor para',
+    h1b: 'comprar',
+    sub: 'Picks reais de compradores reais. Sem patrocínios, sem enrolação. Só o produto que realmente funciona.',
+    placeholder: 'O que você procura? ex: aspirador robô, protetor solar…',
+    browse: 'Navegar por categoria',
+    featured: 'Picks em destaque',
+    scanning: 'Escaneando agora',
+    soon: 'Mais picks em breve',
+    soonSub: 'O radar roda a cada 3 horas. Novos produtos aparecem aqui automaticamente.',
+    beautyLoading: 'Picks de beleza carregando…',
+    beautySub: 'r/SkincareAddiction · r/MakeupAddiction sendo escaneados.',
+    prefix: '',
+    cats: ['🍳 Cozinha','✨ Beleza','🖱 Tech','🏕 Ar livre','🐾 Pets','🚗 Automotivo','🏠 Casa','👟 Moda'],
+    disclosure: 'Divulgação: ganhamos uma pequena comissão sem custo extra para você.',
+  },
+  de: {
+    eyebrow: 'Neue Picks werden automatisch hinzugefügt',
+    h1a: 'Finde das Beste zum',
+    h1b: 'Kaufen',
+    sub: 'Echte Empfehlungen von echten Käufern. Keine Sponsoren, kein Bullshit. Nur das Produkt, das wirklich funktioniert.',
+    placeholder: 'Was suchst du? z.B. Roboterstaubsauger, Sonnencreme…',
+    browse: 'Nach Kategorie stöbern',
+    featured: 'Top Picks',
+    scanning: 'Scanne gerade',
+    soon: 'Mehr Picks bald',
+    soonSub: 'Der Radar läuft alle 3 Stunden. Neue Produkte erscheinen hier automatisch.',
+    beautyLoading: 'Beauty-Picks laden…',
+    beautySub: 'r/SkincareAddiction · r/MakeupAddiction werden gescannt.',
+    prefix: '/de',
+    cats: ['🍳 Küche','✨ Beauty','🖱 Tech','🏕 Outdoor','🐾 Haustiere','🚗 Auto','🏠 Zuhause','👟 Mode'],
+    disclosure: 'Affiliate-Hinweis: Wir verdienen eine kleine Provision ohne Mehrkosten für dich.',
+  },
+  fr: {
+    eyebrow: 'Nouveaux picks ajoutés automatiquement',
+    h1a: 'Trouve le meilleur à',
+    h1b: 'acheter',
+    sub: "Des picks réels de vrais acheteurs. Pas de sponsoring, pas de blabla. Juste le produit qui fonctionne vraiment.",
+    placeholder: 'Que cherches-tu ? ex: aspirateur robot, crème solaire…',
+    browse: 'Parcourir par catégorie',
+    featured: 'Picks vedettes',
+    scanning: 'Scan en cours',
+    soon: 'Plus de picks bientôt',
+    soonSub: 'Le radar tourne toutes les 3 heures. Les nouveaux produits apparaissent ici automatiquement.',
+    beautyLoading: 'Picks beauté en cours…',
+    beautySub: 'r/SkincareAddiction · r/MakeupAddiction en cours de scan.',
+    prefix: '/fr',
+    cats: ['🍳 Cuisine','✨ Beauté','🖱 Tech','🏕 Plein air','🐾 Animaux','🚗 Auto','🏠 Maison','👟 Mode'],
+    disclosure: "Divulgation d'affiliation : nous gagnons une petite commission sans frais supplémentaires pour vous.",
+  },
 }
-// Smooth scroll for pill links
+const DEFAULT = {
+  eyebrow:'New picks added automatically',
+  h1a:'Find the best',h1b:'anything to buy',
+  sub:"Real picks from real buyers. No sponsored content, no guessing. Just the product that actually works.",
+  placeholder:"What are you looking for? e.g. robot vacuum, sunscreen…",
+  browse:'Browse by category',featured:'Featured picks',
+  scanning:'Scanning now',soon:'More picks coming soon',
+  soonSub:'The radar runs every 3 hours. New products appear here automatically.',
+  beautyLoading:'Beauty picks loading…',
+  beautySub:'r/SkincareAddiction · r/MakeupAddiction being scanned right now.',
+  prefix:'',
+  cats:['🍳 Kitchen','✨ Beauty','🖱 Tech','🏕 Outdoors','🐾 Pets','🚗 Automotive','🏠 Home','👟 Fashion'],
+  disclosure:'Affiliate disclosure: we earn a small commission on purchases at no extra cost to you.',
+}
+
+function detectLang(){
+  const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase()
+  if(nav.startsWith('es')) return 'es'
+  if(nav.startsWith('pt')) return 'pt'
+  if(nav.startsWith('de')) return 'de'
+  if(nav.startsWith('fr')) return 'fr'
+  return null
+}
+
+function applyLang(t){
+  const set = (sel,val) => { const el=document.querySelector(sel); if(el) el.innerHTML=val }
+  const setTxt = (sel,val) => { const el=document.querySelector(sel); if(el) el.textContent=val }
+  setTxt('.hero-eyebrow .label', t.eyebrow)
+  set('.hero h1', `${t.h1a}<br><em>${t.h1b}</em>`)
+  setTxt('.hero .sub', t.sub)
+  const inp = document.getElementById('searchInput')
+  if(inp) inp.placeholder = t.placeholder
+  document.querySelectorAll('.cat-name').forEach((el,i)=>{
+    if(t.cats[i]) el.textContent = t.cats[i].slice(2)
+  })
+  document.querySelectorAll('.section-head h2').forEach((el,i)=>{
+    if(i===0) el.textContent = t.browse
+    if(i===1) el.textContent = t.featured
+  })
+  document.querySelectorAll('.scanning').forEach(el=>{
+    const dot = el.querySelector('.live-dot')
+    el.innerHTML = ''
+    if(dot) el.appendChild(dot)
+    el.appendChild(document.createTextNode(' '+t.scanning))
+  })
+  const comings = document.querySelectorAll('.coming-card')
+  if(comings[0]){
+    comings[0].querySelector('h4').textContent = t.soon
+    comings[0].querySelector('p').textContent = t.soonSub
+  }
+  if(comings[1]){
+    comings[1].querySelector('h4').textContent = t.beautyLoading
+    comings[1].querySelector('p').textContent = t.beautySub
+  }
+  const foot = document.querySelector('footer span')
+  if(foot) foot.textContent = t.disclosure
+  document.documentElement.lang = detectLang() || 'en'
+}
+
+const lang = detectLang()
+if(lang && LANGS[lang]) applyLang(LANGS[lang])
+
+// ── Búsqueda ──────────────────────────────────────────────────────────────
+function doSearch(){
+  const t = LANGS[detectLang()] || DEFAULT
+  const q = document.getElementById('searchInput').value.trim()
+  if(q){
+    const slug = q.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')
+    window.location.href = t.prefix + '/best-' + slug + '/'
+  }
+}
+document.getElementById('searchInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') doSearch()
+})
+
+// ── Smooth scroll ─────────────────────────────────────────────────────────
 document.querySelectorAll('.pill[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const t=document.querySelector(a.getAttribute('href'))
