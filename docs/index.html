@@ -1,29 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Best Product Reviews — Reddit-Validated Picks</title>
-  <meta name="description" content="Honest product reviews validated by Reddit communities and Google Trends data.">
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <style>
-    body{font-family:-apple-system,sans-serif;max-width:760px;margin:0 auto;padding:24px 20px;color:#222}
-    h1{font-size:1.8rem;margin-bottom:.4rem}
-    p.sub{color:#666;margin-bottom:2rem}
-    ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
-    li a{display:block;padding:12px 16px;background:#f5f5f5;border-radius:8px;
-           text-decoration:none;color:#0066cc;font-weight:500;
-           border:1px solid #e0e0e0;transition:background .15s}
-    li a:hover{background:#e8f0fe}
-    footer{margin-top:3rem;font-size:.8rem;color:#aaa;border-top:1px solid #eee;padding-top:1rem}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TrendVortex — Reddit-Validated Product Picks</title>
+<meta name="description" content="AI-powered product picks validated by Reddit buying signals and Google Trends data. No ads, no sponsorships — pure data.">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--bg2:#111118;--card:#16161f;--card2:#1e1e2a;
+  --accent:#00d4aa;--accent2:#7c3aed;
+  --blanco:#f0f0f5;--gris:#8888a0;
+  --borde:rgba(255,255,255,0.07);
+  --verde:#00d4aa;--oro:#f0b429;
+}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--blanco);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── HERO ── */
+.hero{
+  width:100%;min-height:100vh;
+  background:linear-gradient(160deg,#0a0a0f 0%,#0d1020 60%,#0a0a0f 100%);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:60px 24px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% -10%,rgba(0,212,170,.18) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 80%,rgba(124,58,237,.12) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,212,170,.12);border:1px solid rgba(0,212,170,.3);
+  color:var(--verde);font-size:.7rem;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:28px;
+}
+.hero-badge .dot{width:6px;height:6px;background:var(--verde);border-radius:50%;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-size:clamp(2.2rem,8vw,4rem);font-weight:900;line-height:1.05;
+  margin-bottom:20px;
+  background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,#7c3aed 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero .sub{
+  color:var(--gris);font-size:clamp(.95rem,2.5vw,1.15rem);
+  max-width:520px;margin:0 auto 40px;line-height:1.7;
+}
+.trust-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:52px}
+.trust-badge{
+  background:rgba(255,255,255,.06);border:1px solid var(--borde);
+  border-radius:20px;padding:6px 14px;font-size:.75rem;font-weight:600;color:var(--gris);
+}
+.trust-badge span{color:var(--verde);margin-right:4px}
+
+/* Stats row */
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-bottom:20px}
+.stat{text-align:center}
+.stat-n{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;color:var(--verde);line-height:1}
+.stat-l{font-size:.7rem;color:var(--gris);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+
+/* Scroll hint */
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--gris);font-size:.72rem;letter-spacing:1px;text-transform:uppercase;animation:fadeup 2s ease-in-out infinite}
+@keyframes fadeup{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:1;transform:translateX(-50%) translateY(-4px)}}
+.scroll-hint svg{width:20px;opacity:.5}
+
+/* ── TICKER ── */
+.ticker-wrap{background:var(--card2);border-top:1px solid var(--borde);border-bottom:1px solid var(--borde);overflow:hidden;padding:12px 0}
+.ticker-inner{display:flex;gap:32px;animation:ticker 25s linear infinite;white-space:nowrap;padding:0 20px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--gris)}
+.tick-name{color:#fff;font-weight:700}
+.tick-val{color:var(--verde);font-weight:700}
+
+/* ── SECCIÓN PICKS ── */
+.section{padding:72px 24px}
+.section-inner{max-width:900px;margin:0 auto}
+.sec-label{font-size:.65rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.sec-title{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:8px}
+.sec-sub{color:var(--gris);font-size:.95rem;margin-bottom:40px}
+
+/* Grid de picks */
+.picks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.pick-card{
+  background:var(--card);border:1px solid var(--borde);border-radius:16px;
+  padding:20px;text-decoration:none;color:var(--blanco);
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  display:flex;flex-direction:column;gap:12px;
+}
+.pick-card:hover{
+  border-color:rgba(0,212,170,.4);transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(0,212,170,.1);
+}
+.pick-cat{font-size:.65rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent)}
+.pick-title{font-size:1rem;font-weight:700;line-height:1.3;color:#fff}
+.pick-meta{display:flex;align-items:center;gap:10px;margin-top:auto}
+.pick-badge{background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);color:var(--verde);font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:6px}
+.pick-arrow{margin-left:auto;color:var(--gris);font-size:1rem;transition:color .2s}
+.pick-card:hover .pick-arrow{color:var(--verde)}
+
+/* Empty state */
+.empty{
+  background:var(--card);border:1px dashed rgba(255,255,255,.1);
+  border-radius:16px;padding:48px 32px;text-align:center;
+}
+.empty-icon{font-size:2.5rem;margin-bottom:16px}
+.empty h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.empty p{color:var(--gris);font-size:.9rem;max-width:380px;margin:0 auto}
+.pulse-dot{display:inline-block;width:8px;height:8px;background:var(--verde);border-radius:50%;margin-right:6px;animation:blink 1s ease-in-out infinite;vertical-align:middle}
+
+/* ── HOW IT WORKS ── */
+.how{background:var(--bg2);border-top:1px solid var(--borde);border-bottom:1px solid var(--borde);padding:72px 24px}
+.how-inner{max-width:860px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:40px}
+.step{background:var(--card);border:1px solid var(--borde);border-radius:14px;padding:24px}
+.step-num{font-size:2rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:10px}
+.step h3{font-size:.9rem;font-weight:700;margin-bottom:6px;color:#fff}
+.step p{font-size:.82rem;color:var(--gris);line-height:1.6}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:32px 24px;border-top:1px solid var(--borde);font-size:.75rem;color:var(--gris)}
+footer strong{color:var(--blanco)}
+</style>
 </head>
 <body>
-  <h1>Best Product Reviews</h1>
-  <p class="sub">Reddit-validated picks — verified by Google Trends data.</p>
-  <ul>
-<li><a href="/best-sous-vide-cooker/">Best Sous Vide Cooker</a></li>
-  </ul>
-  <footer>Affiliate disclosure: pages contain affiliate links. Last updated: 2026-06-15</footer>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Live · Powered by Reddit + Google Trends
+  </div>
+
+  <h1>Products people<br>actually want to buy</h1>
+
+  <p class="sub">
+    We scan Reddit buying signals, validate with Google Trends,
+    and surface the best product in every niche — no sponsorships, pure data.
+  </p>
+
+  <div class="trust-row">
+    <span class="trust-badge"><span>✓</span> Reddit validated</span>
+    <span class="trust-badge"><span>✓</span> Google Trends verified</span>
+    <span class="trust-badge"><span>✓</span> Real Amazon products</span>
+    <span class="trust-badge"><span>✓</span> No paid placements</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-n">50+</div>
+      <div class="stat-l">Subreddits scanned</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">3h</div>
+      <div class="stat-l">Radar cycle</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">10%</div>
+      <div class="stat-l">Max commission</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    Browse picks
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="tick-item"><span class="tick-name">LUXURY BEAUTY</span><span class="tick-val">10% commission</span></div>
+    <div class="tick-item"><span class="tick-name">KITCHEN & DINING</span><span class="tick-val">4.5% commission</span></div>
+    <div class="tick-item"><span class="tick-name">AUTOMOTIVE</span><span class="tick-val">4.5% commission</span></div>
+    <div class="tick-item"><span class="tick-name">PET SUPPLIES</span><span class="tick-val">5% commission</span></div>
+    <div class="tick-item"><span class="tick-name">AMAZON GAMES</span><span class="tick-val">20% commission</span></div>
+    <div class="tick-item"><span class="tick-name">SPORTS & OUTDOORS</span><span class="tick-val">3% commission</span></div>
+    <!-- loop -->
+    <div class="tick-item"><span class="tick-name">LUXURY BEAUTY</span><span class="tick-val">10% commission</span></div>
+    <div class="tick-item"><span class="tick-name">KITCHEN & DINING</span><span class="tick-val">4.5% commission</span></div>
+    <div class="tick-item"><span class="tick-name">AUTOMOTIVE</span><span class="tick-val">4.5% commission</span></div>
+    <div class="tick-item"><span class="tick-name">PET SUPPLIES</span><span class="tick-val">5% commission</span></div>
+    <div class="tick-item"><span class="tick-name">AMAZON GAMES</span><span class="tick-val">20% commission</span></div>
+    <div class="tick-item"><span class="tick-name">SPORTS & OUTDOORS</span><span class="tick-val">3% commission</span></div>
+  </div>
+</div>
+
+<!-- PICKS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="sec-label">Validated Picks</div>
+    <h2 class="sec-title">Top Products Right Now</h2>
+    <p class="sec-sub">Each pick passed Reddit buying-intent detection + Google Trends validation.</p>
+
+    <div class="picks-grid">
+      <a class="pick-card" href="/best-sous-vide-cooker/">
+        <div class="pick-cat">Kitchen & Dining · 4.5%</div>
+        <div class="pick-title">Best Sous Vide Cooker</div>
+        <div class="pick-meta">
+          <span class="pick-badge">📈 Trending</span>
+          <span class="pick-arrow">→</span>
+        </div>
+      </a>
+
+      <div class="pick-card empty" style="border-style:dashed;cursor:default">
+        <div class="empty-icon">📡</div>
+        <h3><span class="pulse-dot"></span>Scanning now…</h3>
+        <p>The radar is running. New picks appear here automatically every 3 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <div class="sec-label">How It Works</div>
+    <h2 class="sec-title">Data-driven picks, no guessing</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Reddit Radar</h3>
+        <p>50+ subreddits scanned every 3 hours for real buying-intent signals.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Trends Validation</h3>
+        <p>Google Trends confirms the keyword is rising, not just a one-off post.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Product Match</h3>
+        <p>Amazon product found: $30–$150, 4★+, 50+ reviews — sweet spot.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Page Live</h3>
+        <p>Page published automatically. SEO-optimized for "best [product]" searches.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>TrendVortex.tech</strong> · Affiliate disclosure: pages contain affiliate links. We earn a small commission at no extra cost to you.<br>
+  <span style="margin-top:.5rem;display:block">Powered by Reddit + Google Trends · Updated automatically</span>
+</footer>
+
 </body>
 </html>
