@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Secrets
+.env
+
+# Runtime files
+leads.csv
+seen_ids.txt
+swarm_memory.json
+trend_history.json
+
+# Runtime/cache
+macro_queue.json
