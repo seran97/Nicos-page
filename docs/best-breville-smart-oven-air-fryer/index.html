@@ -315,4 +315,57 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
+
+<style>
+.related-wrap{max-width:820px;margin:0 auto;padding:0 20px 24px}
+.related-h{font-size:1.05rem;font-weight:900;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.rel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s}
+.rel-card:hover{border-color:var(--cta)}
+.rel-card img{width:100%;height:100px;object-fit:contain;background:var(--bg2);padding:8px;border-bottom:1px solid var(--border)}
+.rel-body{padding:10px}
+.rel-title{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:5px}
+.rel-meta{font-size:.72rem;color:var(--text2)}
+.rel-price{font-size:.95rem;font-weight:900;color:var(--text);margin-top:4px}
+</style>
+<div class="related-wrap">
+  <div class="related-h">
+    <span>More Kitchen & Dining Reviews</span>
+    <a href="https://trendvortex.tech/best-kitchen-dining/" style="color:var(--cta);font-size:.82rem;font-weight:700;text-decoration:none">View all Kitchen & Dining →</a>
+  </div>
+  <div class="related-grid">
+  <a href="https://trendvortex.tech/best-air-fryer/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71XyGxT1ITL._AC_UY218_.jpg" alt="Instant Pot 4QT Vortex Plus 6-in-1 Mini Air Fryer, Custom Program Options, Crisps, Broils, Roasts, Dehydrates, Bakes, Re" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Instant Pot 4QT Vortex Plus 6-in-1 Mini Air Fryer, Cust...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$59.98</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-instant-pot-vortex-plus-10-quart-air-fryer-oven/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71GPWtT61gL._AC_UY218_.jpg" alt="6QT VORTEX Plus Air Fryer, 6-in-1, Air Fry, Broil, Dehydrate, Crisp, Roast, Reheat, Bake, Dishwasher-Safe Airfryer baske" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">6QT VORTEX Plus Air Fryer, 6-in-1, Air Fry, Broil, Dehy...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$69.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-breville-smart-oven-air-fryer-pro/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/81AUxm--7pL._AC_UY218_.jpg" alt="Emeril Lagasse Extra Large French Door Air Fryer Toaster Oven Combo, 24 Cooking Functions and Digital Controls, 7 Access" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Emeril Lagasse Extra Large French Door Air Fryer Toaste...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.4★</div>
+      <div class="rel-price">$147.23</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-sous-vide-cooker/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71TXRDhImVL._AC_UY218_.jpg" alt="INKBIRD WIFI Sous Vide Cooker ISV-100W, 1000 Watts Sous Vide Machine Immersion Circulator with 14 Free Preset Recipes on" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">INKBIRD WIFI Sous Vide Cooker ISV-100W, 1000 Watts Sous...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$72.94</div>
+    </div>
+  </a>
+  </div>
+</div>
 </body></html>
