@@ -319,4 +319,57 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
+
+<style>
+.related-wrap{max-width:820px;margin:0 auto;padding:0 20px 24px}
+.related-h{font-size:1.05rem;font-weight:900;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.rel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s}
+.rel-card:hover{border-color:var(--cta)}
+.rel-card img{width:100%;height:100px;object-fit:contain;background:var(--bg2);padding:8px;border-bottom:1px solid var(--border)}
+.rel-body{padding:10px}
+.rel-title{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:5px}
+.rel-meta{font-size:.72rem;color:var(--text2)}
+.rel-price{font-size:.95rem;font-weight:900;color:var(--text);margin-top:4px}
+</style>
+<div class="related-wrap">
+  <div class="related-h">
+    <span>More Automotive Reviews</span>
+    <a href="https://trendvortex.tech/best-automotive/" style="color:var(--cta);font-size:.82rem;font-weight:700;text-decoration:none">View all Automotive →</a>
+  </div>
+  <div class="related-grid">
+  <a href="https://trendvortex.tech/best-car-detailing-kit/" class="rel-card">
+    <img src="https://via.placeholder.com/300x300/16161f/00d4aa?text=car+detailing+kit" alt="Best Car Detailing Kit — Top Pick" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Best Car Detailing Kit — Top Pick</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$49.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-car-seat-cover/" class="rel-card">
+    <img src="https://via.placeholder.com/300x300/16161f/00d4aa?text=car+seat+cover" alt="Best Car Seat Cover — Top Pick" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Best Car Seat Cover — Top Pick</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$49.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-dashcam-for-car/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/81vt9WaG1RL._AC_UY218_.jpg" alt="Vantrue New N4S 3 Channel Dash Cam, STARVIS 2 Night Vision, Front Rear Inside Dashcam for Cars, Front and Rear Dual Chan" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Vantrue New N4S 3 Channel Dash Cam, STARVIS 2 Night Vis...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.4★</div>
+      <div class="rel-price">$189.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-dashcam-for-cars/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71JUHREWLJL._AC_UY218_.jpg" alt="HUPEJOS AI 4K Dash Cam Front and Rear Recording with Driver Monitoring System, 360° View 4 Channel Dashcam Car Camera, S" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">HUPEJOS AI 4K Dash Cam Front and Rear Recording with Dr...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.3★</div>
+      <div class="rel-price">$189.99</div>
+    </div>
+  </a>
+  </div>
+</div>
 </body></html>

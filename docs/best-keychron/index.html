@@ -319,4 +319,57 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
+
+<style>
+.related-wrap{max-width:820px;margin:0 auto;padding:0 20px 24px}
+.related-h{font-size:1.05rem;font-weight:900;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.rel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s}
+.rel-card:hover{border-color:var(--cta)}
+.rel-card img{width:100%;height:100px;object-fit:contain;background:var(--bg2);padding:8px;border-bottom:1px solid var(--border)}
+.rel-body{padding:10px}
+.rel-title{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:5px}
+.rel-meta{font-size:.72rem;color:var(--text2)}
+.rel-price{font-size:.95rem;font-weight:900;color:var(--text);margin-top:4px}
+</style>
+<div class="related-wrap">
+  <div class="related-h">
+    <span>More Amazon Games Reviews</span>
+    <a href="https://trendvortex.tech/best-gaming-gear/" style="color:var(--cta);font-size:.82rem;font-weight:700;text-decoration:none">View all Amazon Games →</a>
+  </div>
+  <div class="related-grid">
+  <a href="https://trendvortex.tech/best-gaming-mouse/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/51sg9BLSMTL._AC_UY218_.jpg" alt="Logitech G305 Lightspeed Wireless Gaming Mouse, Hero Sensor, 12,000 DPI, Lightweight, 6 Programmable Buttons, 250h Batte" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Logitech G305 Lightspeed Wireless Gaming Mouse, Hero Se...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.6★</div>
+      <div class="rel-price">$30.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-hyperx-alloy-origins-core-mechanical-gaming-keyboard/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71LZTxxNVxL._AC_UY218_.jpg" alt="Alloy Origins 60 - Mechanical Gaming Keyboard, Ultra Compact 60% Form Factor, Double Shot PBT Keycaps, RGB LED Backlit, " loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Alloy Origins 60 - Mechanical Gaming Keyboard, Ultra Co...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.7★</div>
+      <div class="rel-price">$59.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-hyperx-alloy-origins-mechanical-gaming-keyboard/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/612KPOukkQL._AC_UY218_.jpg" alt="Alloy Origins - Mechanical Gaming Keyboard, Software-Controlled Light & Macro Customization, Compact Form Factor, RGB LE" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Alloy Origins - Mechanical Gaming Keyboard, Software-Co...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.7★</div>
+      <div class="rel-price">$124.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-gaming-headset/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71CT4h6bDSL._AC_UY218_.jpg" alt="Razer BlackShark V2 X Gaming Headset: 7.1 Surround Sound - 50mm Drivers - Memory Foam Cushion - For PC, PS4, PS5, Switch" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Razer BlackShark V2 X Gaming Headset: 7.1 Surround Soun...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.4★</div>
+      <div class="rel-price">$39.99</div>
+    </div>
+  </a>
+  </div>
+</div>
 </body></html>
