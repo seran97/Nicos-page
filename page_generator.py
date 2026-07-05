@@ -86,7 +86,7 @@ def generar_pagina(keyword: str, amazon: dict, trends: dict,
                     "@type": "Answer",
                     "text": (f"With {amazon['reviews']:,} verified reviews averaging "
                              f"{amazon['rating']}★ and a price of ${amazon['precio']:.2f}, "
-                             f"it sits in the $30–$150 sweet spot that Reddit buyers trust.")
+                             f"it sits in the $15–$250 sweet spot that Reddit buyers trust.")
                 }
             },
             {
@@ -152,7 +152,9 @@ def generar_pagina(keyword: str, amazon: dict, trends: dict,
                     border-radius:10px;padding:18px;margin:1.5rem 0;
                     box-shadow:0 2px 8px rgba(0,0,0,.07)}}
     .product-card img{{width:130px;height:130px;object-fit:contain;flex-shrink:0;
-                        border-radius:6px;background:#f9f9f9}}
+                        border-radius:6px;background:#f9f9f9;cursor:pointer;transition:opacity .15s}}
+    .product-card img:hover{{opacity:.85}}
+    .product-name:hover{{color:#0066cc}}
     .product-info{{flex:1}}
     .product-name{{font-weight:600;font-size:1rem;margin-bottom:.5rem;color:#111}}
     .stars{{color:#e77600;font-size:1.05rem;letter-spacing:1px}}
@@ -209,9 +211,11 @@ def generar_pagina(keyword: str, amazon: dict, trends: dict,
   <h2>Our Top Pick for {keyword.title()}</h2>
 
   <div class="product-card">
-    <img src="{amazon['imagen_url']}" alt="{amazon['titulo']}" loading="lazy">
+    <a href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank" aria-label="View {amazon['titulo']} on Amazon">
+      <img src="{amazon['imagen_url']}" alt="{amazon['titulo']}" loading="lazy">
+    </a>
     <div class="product-info">
-      <p class="product-name">{amazon['titulo']}</p>
+      <a class="product-name" href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank" style="text-decoration:none;display:block;color:inherit">{amazon['titulo']}</a>
       <p>
         <span class="stars">{stars_filled}{stars_empty}</span>
         <span class="review-count">{amazon['rating']} ({amazon['reviews']:,} reviews)</span>
@@ -235,7 +239,7 @@ def generar_pagina(keyword: str, amazon: dict, trends: dict,
     <tr><th>Factor</th><th>What Reddit Says</th><th>Our Pick</th></tr>
     <tr>
       <td>Price range</td>
-      <td>$30–$150 sweet spot</td>
+      <td>$15–$250 sweet spot</td>
       <td>${amazon['precio']:.0f} ✓</td>
     </tr>
     <tr>
