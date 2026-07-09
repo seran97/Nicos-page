@@ -319,4 +319,57 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
+
+<style>
+.related-wrap{max-width:820px;margin:0 auto;padding:0 20px 24px}
+.related-h{font-size:1.05rem;font-weight:900;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.rel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s}
+.rel-card:hover{border-color:var(--cta)}
+.rel-card img{width:100%;height:100px;object-fit:contain;background:var(--bg2);padding:8px;border-bottom:1px solid var(--border)}
+.rel-body{padding:10px}
+.rel-title{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:5px}
+.rel-meta{font-size:.72rem;color:var(--text2)}
+.rel-price{font-size:.95rem;font-weight:900;color:var(--text);margin-top:4px}
+</style>
+<div class="related-wrap">
+  <div class="related-h">
+    <span>More Luxury Beauty Reviews</span>
+    <a href="https://trendvortex.tech/best-beauty/" style="color:var(--cta);font-size:.82rem;font-weight:700;text-decoration:none">View all Luxury Beauty →</a>
+  </div>
+  <div class="related-grid">
+  <a href="https://trendvortex.tech/best-anti-chafing-stick-for-thighs/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/714b+RCHU1L._AC_UL320_.jpg" alt="HAPPY NUTS Anti-Chafe Comfort Stick for Men: Ultimate Friction Defense & Chafing Prevention for Active Lifestyles - Perf" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">HAPPY NUTS Anti-Chafe Comfort Stick for Men: Ultimate F...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.7★</div>
+      <div class="rel-price">$17.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-sunscreen-for-sensitive-skin-spf-50/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/61UhU+54OlL._AC_UL320_.jpg" alt="SKIN1004 Centella Hyalu-Cica Water-Fit Sun Serum UV, Korean Sunscreen SPF 50, Centella Sunscreen, Travel Essentials, Sun" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">SKIN1004 Centella Hyalu-Cica Water-Fit Sun Serum UV, Ko...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$16.29</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-sunscreen-spf/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/61UhU+54OlL._AC_UL320_.jpg" alt="SKIN1004 Centella Hyalu-Cica Water-Fit Sun Serum UV, Korean Sunscreen SPF 50, Centella Sunscreen, Travel Essentials, Sun" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">SKIN1004 Centella Hyalu-Cica Water-Fit Sun Serum UV, Ko...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$16.29</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-after-sun-lotion-aloe-vera/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71Xq7MGTmHL._AC_UL320_.jpg" alt="100 Pack Bulk Aloe Vera Gel, 99% Pure Aloe Vera Gel for Face, Hair, Skin, Body, Hydrating Aloe Gel Travel Size Suitable " loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">100 Pack Bulk Aloe Vera Gel, 99% Pure Aloe Vera Gel for...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.6★</div>
+      <div class="rel-price">$21.59</div>
+    </div>
+  </a>
+  </div>
+</div>
 </body></html>

@@ -319,4 +319,57 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
+
+<style>
+.related-wrap{max-width:820px;margin:0 auto;padding:0 20px 24px}
+.related-h{font-size:1.05rem;font-weight:900;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.rel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:border-color .2s}
+.rel-card:hover{border-color:var(--cta)}
+.rel-card img{width:100%;height:100px;object-fit:contain;background:var(--bg2);padding:8px;border-bottom:1px solid var(--border)}
+.rel-body{padding:10px}
+.rel-title{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:5px}
+.rel-meta{font-size:.72rem;color:var(--text2)}
+.rel-price{font-size:.95rem;font-weight:900;color:var(--text);margin-top:4px}
+</style>
+<div class="related-wrap">
+  <div class="related-h">
+    <span>More Kitchen & Dining Reviews</span>
+    <a href="https://trendvortex.tech/best-kitchen-dining/" style="color:var(--cta);font-size:.82rem;font-weight:700;text-decoration:none">View all Kitchen & Dining →</a>
+  </div>
+  <div class="related-grid">
+  <a href="https://trendvortex.tech/best-insulated-water-bottle-with-straw/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/61Gg6aIO1yL._AC_UL320_.jpg" alt="Coolflask Half Gallon Water Bottle with Strap, 64oz Insulated Water Jug Stainless Steel with Straw & Spout Lids, Metal L" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Coolflask Half Gallon Water Bottle with Strap, 64oz Ins...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.4★</div>
+      <div class="rel-price">$28.79</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-picky-eater-dinner/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/41JKOInnRmL._AC_UY218_.jpg" alt="Healthy Nutrition Plate for Picky Eaters - Spin the Arrow - Meals are Fun Again" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Healthy Nutrition Plate for Picky Eaters - Spin the Arr...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.7★</div>
+      <div class="rel-price">$23.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-homemade-ice-cream/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71omcalO26L._AC_UL320_.jpg" alt="ZICOTO Set of 2 Reusable Ice Cream Tub Containers 2 Quart Each - Perfect for Homemade Sorbet, Frozen Yogurt Or Gelato - " loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">ZICOTO Set of 2 Reusable Ice Cream Tub Containers 2 Qua...</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.5★</div>
+      <div class="rel-price">$29.99</div>
+    </div>
+  </a>
+  <a href="https://trendvortex.tech/best-induction-misen-carbon/" class="rel-card">
+    <img src="https://m.media-amazon.com/images/I/71ZalxBiwML._AC_UL320_.jpg" alt="Misen" loading="lazy">
+    <div class="rel-body">
+      <div class="rel-title">Misen</div>
+      <div class="rel-meta"><span style="color:#f59e0b">★★★★☆</span> 4.6★</div>
+      <div class="rel-price">$119.00</div>
+    </div>
+  </a>
+  </div>
+</div>
 </body></html>
