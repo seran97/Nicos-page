@@ -33,6 +33,7 @@ from agents.seo_agent      import SEOAgent
 from agents.designer_agent import DesignerAgent
 from memory.swarm_memory   import SwarmMemory, Episode
 from markets import get_active, ALL_MARKETS
+from learning.niche_learner import NicheLearner
 
 # ── Config ────────────────────────────────────────────────────────────────────
 LEADS_CSV     = Path("leads.csv")          # output de radar_nichos.py
@@ -123,7 +124,7 @@ def build_agents():
 # ── Pipeline por lead ─────────────────────────────────────────────────────────
 
 def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
-                 dry_run: bool = False) -> str | None:
+                 dry_run: bool = False, learner: NicheLearner | None = None) -> str | None:
     """
     Ejecuta el pipeline completo para un lead.
     Retorna el slug desplegado, o None si se descartó.
@@ -208,10 +209,48 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
     sym    = market["currency_sym"]
     log(f"{source} [{market['label']}] → {amazon['titulo'][:44]}… {sym}{amazon['precio']:.2f} {amazon['rating']}★", "🛒")
 
+    slugs = []
+    main_slug = _seo_and_design(
+        keyword, amazon, trend_result, subreddit, amazon_cat, market,
+        agents, memory, dry_run, learner,
+    )
+    if main_slug:
+        slugs.append(main_slug)
+
+    # ── eBay en paralelo (no solo fallback) ──────────────────────────────────
+    # Si Amazon fue la fuente principal, generamos TAMBIÉN una página eBay
+    # para el mismo keyword, así eBay no se queda solo esperando que Amazon falle.
+    if amazon.get("source") == "amazon":
+        try:
+            from ebay_checker import check_ebay
+            ebay = check_ebay(keyword)
+        except Exception as e:
+            log(f"eBay checker error: {e}", "✗")
+            ebay = None
+
+        if ebay:
+            ebay["source"] = "ebay"
+            log(f"EBAY [{market['label']}] → {ebay['titulo'][:44]}… {sym}{ebay['precio']:.2f} {ebay['rating']}★", "🛍")
+            ebay_slug = _seo_and_design(
+                keyword, ebay, trend_result, subreddit, amazon_cat, market,
+                agents, memory, dry_run, learner,
+            )
+            if ebay_slug:
+                slugs.append(ebay_slug)
+
+    return slugs if slugs else None
+
+
+def _seo_and_design(keyword, product, trend_result, subreddit, amazon_cat,
+                     market, agents, memory, dry_run,
+                     learner: NicheLearner | None = None) -> str | None:
+    """Corre SEOAgent + DesignerAgent para un producto (Amazon o eBay) y
+    retorna el slug desplegado, o None si se saltó."""
+
     # ── 3. SEO Agent ──────────────────────────────────────────────────────────
     seo_ctx = {
         "keyword": keyword,
-        "amazon":  amazon,
+        "amazon":  product,
         "amazon_cat": amazon_cat,
         "trend_payload": trend_result.payload,
         "subreddit": subreddit,
@@ -224,7 +263,7 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
     if not dry_run and not _claude_rate_limited():
         design_ctx = {
             "keyword":      keyword,
-            "amazon":       amazon,
+            "amazon":       product,
             "trend_payload":trend_result.payload,
             "subreddit":    subreddit,
             "amazon_cat":   amazon_cat,
@@ -235,8 +274,9 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
         design_result = agents["designer"].act(design_ctx)
         log(f"Designer → {design_result.reasoning}", "🎨")
 
-        slug = design_result.payload.get("slug", "")
-        url  = design_result.payload.get("url", "")
+        slug     = design_result.payload.get("slug", "")
+        url      = design_result.payload.get("url", "")
+        fallback = design_result.payload.get("fallback", False)
 
         memory.add(Episode(
             timestamp=datetime.now().isoformat(),
@@ -244,10 +284,21 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
             keyword=keyword, action="DESIGNED",
             score=trend_result.payload.get("composite_score", 0),
             reasoning=design_result.reasoning,
-            payload={"slug": slug, "url": url},
+            payload={"slug": slug, "url": url, "fallback": fallback},
         ))
 
-        log(f"Página lista → {url}", "✓")
+        if learner:
+            learner.log(
+                keyword=keyword, amazon_cat=amazon_cat,
+                market=market.get("label", ""), source=product.get("source", "amazon"),
+                action="DEPLOYED", fallback=fallback,
+                score=trend_result.payload.get("composite_score", 0), slug=slug,
+            )
+
+        if fallback:
+            log(f"Página lista (⚠ fallback, sin Claude) → {url}", "✓")
+        else:
+            log(f"Página lista → {url}", "✓")
         return slug
     else:
         log("Dry-run: saltar generación HTML", "⏭")
@@ -268,6 +319,11 @@ def run_once(limit: int = 0, dry_run: bool = False, markets_override: list[str] 
 
     memory = SwarmMemory()
     agents = build_agents()
+    learner = NicheLearner()
+
+    # Aprendizaje: reordena por score y descarta duplicados semánticos /
+    # sobre-concentración de categoría ANTES de recortar por el cap de la corrida.
+    df = learner.rank_and_filter_leads(df)
 
     cap   = MAX_PAGES_PER_RUN if MAX_PAGES_PER_RUN > 0 else len(df)
     total = min(cap, len(df)) if not limit else min(limit, len(df), cap)
@@ -277,6 +333,7 @@ def run_once(limit: int = 0, dry_run: bool = False, markets_override: list[str] 
     print(f"  Mercados: {' · '.join(m['label'] for m in active.values())}")
     summary = memory.round_summary()
     print(f"  Memoria: {summary['total_episodes']} eps | {summary['deployed']} páginas")
+    print(f"  Learner: {learner.summary().splitlines()[0]}")
     print(f"{'═'*55}")
 
     all_deployed: list[str] = []
@@ -291,11 +348,12 @@ def run_once(limit: int = 0, dry_run: bool = False, markets_override: list[str] 
 
         deployed_this = []
         for _, row in df_market.iterrows():
-            slug = process_lead(row, agents, memory, dry_run=dry_run)
-            if slug:
-                # Prefijo de mercado en el path (ej: "es/best-xxx")
-                full_slug = f"{market['site_prefix']}/{slug}" if market["site_prefix"] else slug
-                deployed_this.append(full_slug)
+            page_slugs = process_lead(row, agents, memory, dry_run=dry_run, learner=learner)
+            if page_slugs:
+                for slug in page_slugs:
+                    # Prefijo de mercado en el path (ej: "es/best-xxx")
+                    full_slug = f"{market['site_prefix']}/{slug}" if market["site_prefix"] else slug
+                    deployed_this.append(full_slug)
             else:
                 skipped += 1
             time.sleep(LEAD_SLEEP_SECONDS)

@@ -64,6 +64,8 @@ class DesignerAgent(BaseAgent):
         seo_content = context.get("seo_content", {})
 
         kw_slug  = slug(keyword)
+        if amazon.get("source") == "ebay":
+            kw_slug = f"{kw_slug}-ebay"
         page_dir = DOCS_DIR / f"best-{kw_slug}"
         page_dir.mkdir(parents=True, exist_ok=True)
 
@@ -74,6 +76,7 @@ class DesignerAgent(BaseAgent):
             keyword, amazon, trend, subreddit, amazon_cat, seo_content, palette
         )
 
+        used_fallback = html is None
         if not html:
             # Fallback: página básica mejorada
             html = self._fallback_html(keyword, amazon, trend, subreddit, amazon_cat)
@@ -85,7 +88,11 @@ class DesignerAgent(BaseAgent):
             agent_type=self.agent_type,
             success=True,
             reasoning=f"Página generada: docs/best-{kw_slug}/index.html | {amazon_cat}",
-            payload={"slug": kw_slug, "url": f"{SITE_URL}/best-{kw_slug}/"}
+            payload={
+                "slug": kw_slug,
+                "url": f"{SITE_URL}/best-{kw_slug}/",
+                "fallback": used_fallback,
+            }
         )
 
     # ── Generación con Claude ─────────────────────────────────────────────────
