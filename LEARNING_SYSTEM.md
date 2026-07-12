@@ -171,3 +171,24 @@ devolvió `None` (falló Claude) y se usó `_fallback_html()`.
   menos fiable.
 - **Google Search Console**: 11/282 páginas indexadas al 2026-07-12,
   causa principal identificada = 92% contenido fallback (ver arriba).
+
+## Pendientes de afiliación (2026-07-12)
+
+- **eBay**: `EBAY_SID` corregido (`5339156969`), pero falta `EBAY_APP_ID` de
+  developer.ebay.com — cuenta en revisión (~1 día hábil, pendiente desde
+  hoy). Sin ese App ID, el scraping RSS de eBay está bloqueado (HTTP 403)
+  y no genera páginas reales todavía.
+- **AliExpress**: cuenta de Affiliate Portal creada, pero la solicitud de
+  API (rol "Affiliates individual", Colombia) **volvió a estado "En
+  revisión"** — Sergio ya la mandó una vez y AliExpress tarda en aprobar.
+  Faltan `ALIEXPRESS_APP_KEY` y `ALIEXPRESS_APP_SECRET` en `.env` (hoy
+  vacíos) una vez se apruebe. `ALIEXPRESS_TRACKING_ID=sergiocomercial` ya
+  está listo. No existe `aliexpress_checker.py` todavía — hay que
+  escribirlo (mismo patrón que `ebay_checker.py`) una vez lleguen las
+  credenciales.
+
+**Regla acordada con Sergio:** no avanzar a monetización con suscripciones
+u otras integraciones nuevas hasta que eBay y AliExpress también estén
+generando páginas de la misma calidad que Amazon (contenido no-fallback).
+El criterio de "avance" es poder ver páginas de eBay/AliExpress en
+`docs/` con la misma calidad de copy que las de Amazon ya regeneradas.
