@@ -39,10 +39,36 @@ la gran mayoría del sitio tiene texto de plantilla casi idéntico entre
 páginas (frase marcador: `"look for these three factors before
 committing to any"` en `agents/designer_agent.py::_fallback_html`).
 
-**Acción pendiente cuando vuelva el crédito de Anthropic:** correr
-`python learning/find_thin_pages.py --write-queue` y regenerar esas 260
-páginas con Claude real. Esto probablemente tiene más impacto en SEO que
-cualquier otra cosa que se haga en el corto plazo.
+**Actualización 2026-07-12 (tarde):** en vez de esperar crédito de Anthropic,
+Sergio pidió usar la propia capacidad de generación de Claude Code (esta
+sesión) para reescribir el copy directamente, sin tocar la API facturada.
+Se construyó el pipeline: `extract_fallback_data.py` (extrae keyword/precio/
+rating/imagen/afiliado de cada página fallback) → 13 agentes en paralelo
+(cada uno reescribe copy original para ~20 productos, sin inventar cifras,
+sin citar "r/macro_radar") → `inject_copy.py` (sustituye solo los bloques de
+texto en el HTML, dejando intactos precio/rating/imagen/links reales) →
+`apply_copy.py` (aplica todos los `learning/copy_batches/copy_*.json` y
+marca `action="REGENERATED"` en `history.jsonl`).
+
+**Estado real:** los 13 agentes ya generaron el copy completo para las 260
+páginas (guardado en la transcripción de esa sesión). Hasta ahora se
+guardaron y aplicaron los lotes `copy_00.json` a `copy_03.json` (80 páginas,
+ver commits "Regenerar copy de..."). **Faltan los lotes 04-12 (~180 páginas)**
+— el contenido ya fue generado por los agentes pero aún no se guardó a disco
+ni se aplicó, por el costo de tokens de transcribir manualmente cada bloque
+JSON gigante en una sola sesión.
+
+**Cómo continuar (siguiente sesión):**
+1. Si la transcripción de los agentes ya no está en contexto, correr de nuevo:
+   `python learning/extract_fallback_data.py > learning/fallback_data.json`,
+   dividir en lotes de ~20 con `learning/batches/batch_XX.json` (ver el script
+   usado en esa sesión), y lanzar agentes Agent tool con el mismo prompt de
+   "Rewrite copy batch NN" usado el 2026-07-12.
+2. Guardar cada respuesta de agente como `learning/copy_batches/copy_NN.json`.
+3. Correr `python learning/apply_copy.py` (es idempotente — re-aplicar copy_00
+   a copy_03 no rompe nada, sólo reescribe el mismo contenido).
+4. Confirmar con `python learning/find_thin_pages.py` que el % de páginas
+   fallback bajó, hacer commit + push de `docs/` y de los nuevos `copy_*.json`.
 
 ## Arquitectura
 
