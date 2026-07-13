@@ -1041,3 +1041,4 @@
 {"timestamp": "2026-07-12T21:27:13.028326", "keyword": "won start after", "amazon_cat": "General", "market": "us", "source": "amazon", "action": "REGENERATED", "fallback": false, "score": 0.0, "slug": "won-start-after"}
 {"timestamp": "2026-07-12T21:27:13.030329", "keyword": "yoga beginners", "amazon_cat": "General", "market": "us", "source": "amazon", "action": "REGENERATED", "fallback": false, "score": 0.0, "slug": "yoga-beginners"}
 {"timestamp": "2026-07-12T21:27:13.031360", "keyword": "yoga mat", "amazon_cat": "General", "market": "us", "source": "amazon", "action": "REGENERATED", "fallback": false, "score": 0.0, "slug": "yoga-mat"}
+{"timestamp": "2026-07-13T10:09:37.089479", "keyword": "chevy impala dashcam video", "amazon_cat": "Automotive", "market": "United States 🇺🇸", "source": "amazon", "action": "DEPLOYED", "fallback": true, "score": 70.98, "slug": "chevy-impala-dashcam-video"}
