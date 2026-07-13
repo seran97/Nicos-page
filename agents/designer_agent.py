@@ -64,8 +64,8 @@ class DesignerAgent(BaseAgent):
         seo_content = context.get("seo_content", {})
 
         kw_slug  = slug(keyword)
-        if amazon.get("source") == "ebay":
-            kw_slug = f"{kw_slug}-ebay"
+        if amazon.get("source") in ("ebay", "aliexpress"):
+            kw_slug = f"{kw_slug}-{amazon['source']}"
         page_dir = DOCS_DIR / f"best-{kw_slug}"
         page_dir.mkdir(parents=True, exist_ok=True)
 

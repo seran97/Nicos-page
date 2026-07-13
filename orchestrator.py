@@ -238,6 +238,24 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
             if ebay_slug:
                 slugs.append(ebay_slug)
 
+        # ── AliExpress en paralelo (mismo patrón que eBay) ───────────────────
+        try:
+            from aliexpress_checker import check_aliexpress
+            aliexpress = check_aliexpress(keyword)
+        except Exception as e:
+            log(f"AliExpress checker error: {e}", "✗")
+            aliexpress = None
+
+        if aliexpress:
+            aliexpress["source"] = "aliexpress"
+            log(f"ALIEXPRESS [{market['label']}] → {aliexpress['titulo'][:44]}… {sym}{aliexpress['precio']:.2f} {aliexpress['rating']}★", "🧧")
+            ali_slug = _seo_and_design(
+                keyword, aliexpress, trend_result, subreddit, amazon_cat, market,
+                agents, memory, dry_run, learner,
+            )
+            if ali_slug:
+                slugs.append(ali_slug)
+
     return slugs if slugs else None
 
 

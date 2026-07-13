@@ -255,7 +255,12 @@ def _run_and_capture(limit, markets_override, deployed_out, skipped_out):
                     # Notificación inmediata con el link
                     kw       = str(row.get("keyword", slug.replace("-", " ")))
                     comision = float(row.get("comision_pct", 3.0))
-                    source   = "ebay" if slug.endswith("-ebay") else "amazon"
+                    if slug.endswith("-ebay"):
+                        source = "ebay"
+                    elif slug.endswith("-aliexpress"):
+                        source = "aliexpress"
+                    else:
+                        source = "amazon"
                     alerta_pagina_nueva(full, kw, comision, source)
             else:
                 skipped_out[0] += 1
