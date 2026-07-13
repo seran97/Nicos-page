@@ -50,25 +50,30 @@ texto en el HTML, dejando intactos precio/rating/imagen/links reales) →
 `apply_copy.py` (aplica todos los `learning/copy_batches/copy_*.json` y
 marca `action="REGENERATED"` en `history.jsonl`).
 
-**Estado real:** los 13 agentes ya generaron el copy completo para las 260
-páginas (guardado en la transcripción de esa sesión). Hasta ahora se
-guardaron y aplicaron los lotes `copy_00.json` a `copy_03.json` (80 páginas,
-ver commits "Regenerar copy de..."). **Faltan los lotes 04-12 (~180 páginas)**
-— el contenido ya fue generado por los agentes pero aún no se guardó a disco
-ni se aplicó, por el costo de tokens de transcribir manualmente cada bloque
-JSON gigante en una sola sesión.
+**Estado final (2026-07-12, completado):** las 286 páginas del sitio (el conteo
+subió de 282 a 286 conforme se generaron páginas nuevas de eBay en paralelo)
+fueron regeneradas con copy original vía 17 lotes (`copy_00.json` a
+`copy_16.json`, commits "Regenerar copy de..."). **`find_thin_pages.py` ahora
+reporta 0% fallback (0 de 286).** Todo el contenido publicado en `docs/` es
+copy original por producto, no plantilla genérica.
 
-**Cómo continuar (siguiente sesión):**
-1. Si la transcripción de los agentes ya no está en contexto, correr de nuevo:
-   `python learning/extract_fallback_data.py > learning/fallback_data.json`,
-   dividir en lotes de ~20 con `learning/batches/batch_XX.json` (ver el script
-   usado en esa sesión), y lanzar agentes Agent tool con el mismo prompt de
-   "Rewrite copy batch NN" usado el 2026-07-12.
-2. Guardar cada respuesta de agente como `learning/copy_batches/copy_NN.json`.
-3. Correr `python learning/apply_copy.py` (es idempotente — re-aplicar copy_00
-   a copy_03 no rompe nada, sólo reescribe el mismo contenido).
-4. Confirmar con `python learning/find_thin_pages.py` que el % de páginas
-   fallback bajó, hacer commit + push de `docs/` y de los nuevos `copy_*.json`.
+**Si en el futuro se agregan páginas nuevas y algunas caen en fallback**
+(por ejemplo si Claude/Gemini vuelven a fallar por falta de crédito), repetir
+el mismo proceso:
+1. `python learning/find_thin_pages.py --write-queue` para generar
+   `regeneration_queue.json` con los slugs pendientes.
+2. `python learning/extract_fallback_data.py > learning/fallback_data.json`
+   y dividir en lotes de ~18-20 con un script rápido (ver historial de
+   commits para el patrón exacto usado).
+3. Lanzar agentes en paralelo (Agent tool, no la API facturada de Anthropic)
+   con el mismo prompt usado en los lotes anteriores: reescribir hero_sub,
+   method_note, pros, cons, not_for, table_lead, guide_lead, guide_steps,
+   faq — sin inventar cifras, sin citar subreddits, variando redacción entre
+   productos para evitar contenido duplicado.
+4. Guardar cada respuesta como `learning/copy_batches/copy_NN.json`, correr
+   `python learning/apply_copy.py` (idempotente), confirmar con
+   `find_thin_pages.py` que bajó a 0%, y hacer commit + push de `docs/` y los
+   `copy_*.json` nuevos.
 
 ## Arquitectura
 
@@ -192,3 +197,10 @@ u otras integraciones nuevas hasta que eBay y AliExpress también estén
 generando páginas de la misma calidad que Amazon (contenido no-fallback).
 El criterio de "avance" es poder ver páginas de eBay/AliExpress en
 `docs/` con la misma calidad de copy que las de Amazon ya regeneradas.
+
+**Nota (2026-07-12):** el 100% del contenido existente (286/286 páginas,
+casi todas de Amazon ya que eBay aún no genera páginas reales por falta de
+`EBAY_APP_ID`) ya cumple el estándar de calidad. La regla de no avanzar a
+suscripciones sigue en pie porque el gate real es tener páginas de eBay y
+AliExpress *funcionando* (no solo con buen copy si llegaran a existir) —
+eso sigue bloqueado por las aprobaciones pendientes de ambas plataformas.
