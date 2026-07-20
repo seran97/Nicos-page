@@ -26,6 +26,38 @@ def slug(texto: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", texto.lower()).strip("-")
 
 
+# Nombre de marketplace para mostrar en copy, y disclosure legal correcto por
+# fuente — antes el template (y el prompt de Claude) decían "Amazon" siempre,
+# aunque el producto fuera de eBay o AliExpress (boton CTA, "may vary on
+# Amazon", disclosure de afiliados, etc.), lo cual además de confuso es
+# legalmente impreciso (el programa de afiliados no es el mismo).
+_SOURCE_NAME = {"amazon": "Amazon", "ebay": "eBay", "aliexpress": "AliExpress"}
+_SOURCE_DISCLOSURE = {
+    "amazon":     "TrendVortex.tech is a participant in the Amazon Services LLC Associates Program.",
+    "ebay":       "TrendVortex.tech is a participant in the eBay Partner Network.",
+    "aliexpress": "TrendVortex.tech is a participant in the AliExpress affiliate program.",
+}
+
+
+def source_name(amazon: dict) -> str:
+    return _SOURCE_NAME.get(amazon.get("source", "amazon"), "Amazon")
+
+
+def source_disclosure(amazon: dict) -> str:
+    return _SOURCE_DISCLOSURE.get(amazon.get("source", "amazon"), _SOURCE_DISCLOSURE["amazon"])
+
+
+_SOURCE_PROTECTION = {
+    "amazon":     "buyer protections (easy returns, A-to-Z Guarantee)",
+    "ebay":       "buyer protections (eBay Money Back Guarantee)",
+    "aliexpress": "buyer protections (AliExpress Buyer Protection)",
+}
+
+
+def source_protection(amazon: dict) -> str:
+    return _SOURCE_PROTECTION.get(amazon.get("source", "amazon"), _SOURCE_PROTECTION["amazon"])
+
+
 class DesignerAgent(BaseAgent):
 
     def __init__(self):
@@ -117,6 +149,8 @@ class DesignerAgent(BaseAgent):
         faqs_json  = json.dumps(faqs or [])
         bullets_json = json.dumps(bullets or [])
         kw_slug_val = slug(keyword)
+        src_name = source_name(amazon)
+        src_disclosure = source_disclosure(amazon)
 
         is_gaming_cat = (amazon_cat == "Amazon Games")
         theme_bg  = "#0f0f1a" if is_gaming_cat else "#ffffff"
@@ -135,7 +169,13 @@ PRODUCT:
 - Rating: {amazon['rating']}★ ({amazon['reviews']:,} reviews)
 - Image: {amazon['imagen_url']}
 - Affiliate link: {amazon['affiliate_url']} (rel="nofollow sponsored")
-- Category: {amazon_cat} | Source: {amazon.get('source','amazon').upper()}
+- Category: {amazon_cat}
+- MARKETPLACE: {src_name} — this product is being bought on {src_name}, NOT necessarily Amazon.
+  Every single mention of the marketplace anywhere in the page (CTA button text like
+  "Check Price on {src_name}", the price note, aria-labels, the "Source" table row, FAQ
+  answers, the footer affiliate disclosure) MUST say "{src_name}" — never write "Amazon"
+  unless {src_name} literally is "Amazon". Use this exact disclosure sentence in the
+  footer: "{src_disclosure}"
 
 SEO CONTENT:
 - Intro: {intro or f'The best {keyword} based on {amazon["reviews"]:,} buyer reviews and community research.'}
@@ -151,7 +191,7 @@ DESIGN SYSTEM:
 - Text secondary: {theme_txt2}
 - Border: {theme_bdr}
 - Accent (decorative borders only): {palette['primary']}
-- CTA button: #FF9900 (Amazon orange, black text) — Big Orange Button
+- CTA button: #FF9900 (bright orange, black text) — Big Orange Button
 - Font: Inter from Google Fonts
 
 PAGE STRUCTURE (in this exact order, no sections missing):
@@ -159,7 +199,7 @@ PAGE STRUCTURE (in this exact order, no sections missing):
 2. Hero section: h1 "Best {keyword.title()} in {anio}", subtitle with review count, trust badges, CTA button to #top-pick
 3. Methodology box: green left border, "How we chose this" paragraph mentioning {amazon['reviews']:,} reviews and r/{subreddit}
 4. Section id="top-pick": "Editor's Choice" orange badge, product card (image left, info right), price ${amazon['precio']:.2f}, {amazon['rating']}★ stars, orange CTA full-width button.
-   IMPORTANT — every click must convert: wrap the product image AND the product title in <a href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank"> so clicking either one also goes straight to Amazon (not just the button). Use cursor:pointer and a subtle hover effect (e.g. slight border/scale) on the image and title to signal they are clickable.
+   IMPORTANT — every click must convert: wrap the product image AND the product title in <a href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank"> so clicking either one also goes straight to {src_name} (not just the button). Use cursor:pointer and a subtle hover effect (e.g. slight border/scale) on the image and title to signal they are clickable.
 5. Section: Pros/Cons grid (2 columns), then "Who this is NOT for" box
 6. Section: comparison table (Rating / Reviews / Price vs buyer benchmarks)
 7. Section: Buying guide with 3 numbered steps (use CSS counter)
@@ -215,6 +255,9 @@ Return ONLY complete HTML starting with <!DOCTYPE html>. No markdown, no explana
         rating_int   = int(amazon["rating"])
         stars        = "★" * rating_int + "☆" * (5 - rating_int)
         source_label = amazon.get("source", "amazon").upper()
+        src_name = source_name(amazon)
+        src_disclosure = source_disclosure(amazon)
+        src_protection = source_protection(amazon)
         is_gaming    = (amazon_cat == "Amazon Games")
 
         # Theme — LIGHT for all categories except Gaming (per CRO/PDF research)
@@ -393,14 +436,14 @@ footer a{{color:var(--text3)}}
     <span class="trust-item">✓ {amazon['reviews']:,} verified reviews</span>
     <span class="trust-item">✓ Updated {mes}</span>
     <span class="trust-item">✓ No paid placements</span>
-    <span class="trust-item">✓ Amazon affiliate</span>
+    <span class="trust-item">✓ {src_name} affiliate</span>
   </div>
   <a href="#top-pick" class="btn-cta">See Our Top Pick ↓</a>
 </div>
 
 <div class="method-box">
   <strong>📋 Our Methodology</strong>
-  We analyzed {amazon['reviews']:,} verified buyer reviews on Amazon and community discussions on Reddit's r/{subreddit}. We only recommend products with a minimum 4★ rating and strong review volume — no single data point decides the pick, and no manufacturer paid to appear here.
+  We analyzed {amazon['reviews']:,} verified buyer reviews on {src_name} and community discussions on Reddit's r/{subreddit}. We only recommend products with a minimum 4★ rating and strong review volume — no single data point decides the pick, and no manufacturer paid to appear here.
 </div>
 
 <div class="wrap">
@@ -411,7 +454,7 @@ footer a{{color:var(--text3)}}
   <h2>Best {keyword.title()} for {anio}</h2>
   <span class="winner-badge">EDITOR'S CHOICE {anio}</span>
   <div class="product-card">
-    <a href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank" aria-label="View {amazon['titulo']} on Amazon">
+    <a href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank" aria-label="View {amazon['titulo']} on {src_name}">
       <img src="{amazon['imagen_url']}" alt="{amazon['titulo']}" loading="eager">
     </a>
     <div class="prod-info">
@@ -423,9 +466,9 @@ footer a{{color:var(--text3)}}
         <span class="prod-review-cnt">({amazon['reviews']:,} verified reviews)</span>
       </div>
       <div class="prod-price">${amazon['precio']:.2f}</div>
-      <div class="prod-price-note">* Price checked daily — may vary on Amazon</div>
+      <div class="prod-price-note">* Price checked daily — may vary on {src_name}</div>
       <a class="btn-cta btn-cta-lg" href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank">
-        Check Price on Amazon →
+        Check Price on {src_name} →
       </a>
     </div>
   </div>
@@ -476,7 +519,7 @@ footer a{{color:var(--text3)}}
         <tr><td>Star Rating</td><td>4.0★ or above</td><td class="{rating_cls}">{amazon['rating']}★ ✓</td></tr>
         <tr><td>Verified Reviews</td><td>500+ reviews</td><td class="{reviews_cls}">{amazon['reviews']:,} ✓</td></tr>
         <tr><td>Price Range</td><td>$15–$250 sweet spot</td><td class="{price_cls}">${amazon['precio']:.2f} ✓</td></tr>
-        <tr><td>Source</td><td>Amazon listing</td><td class="td-good">✓ Amazon</td></tr>
+        <tr><td>Source</td><td>{src_name} listing</td><td class="td-good">✓ {src_name}</td></tr>
       </tbody>
     </table>
   </div>
@@ -512,7 +555,7 @@ footer a{{color:var(--text3)}}
   <h3>Ready to Buy?</h3>
   <p>Our top {keyword} pick: <strong>{amazon['titulo']}</strong> — {amazon['rating']}★ from {amazon['reviews']:,} reviews at ${amazon['precio']:.2f}.</p>
   <a class="btn-cta btn-cta-lg" href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank">
-    Check Current Price on Amazon →
+    Check Current Price on {src_name} →
   </a>
 </div>
 
@@ -530,7 +573,7 @@ footer a{{color:var(--text3)}}
   </div>
   <div class="faq-item">
     <div class="faq-q">Where is the best place to buy {keyword}?</div>
-    <div class="faq-a">Amazon offers the best mix of verified reviews, competitive pricing, and buyer protections (easy returns, A-to-Z guarantee). <a href="{amazon['affiliate_url']}" rel="nofollow sponsored">Check the current price here →</a></div>
+    <div class="faq-a">{src_name} offers the best mix of verified reviews, competitive pricing, and {src_protection}. <a href="{amazon['affiliate_url']}" rel="nofollow sponsored">Check the current price here →</a></div>
   </div>
   <div class="faq-item">
     <div class="faq-q">How much should I pay for a quality {keyword}?</div>
@@ -545,7 +588,7 @@ footer a{{color:var(--text3)}}
 </div>
 
 <footer>
-  <strong>Affiliate disclosure:</strong> TrendVortex.tech is a participant in the Amazon Services LLC Associates Program. When you purchase through our links we earn a small commission at no extra cost to you. We are not paid by manufacturers to recommend specific products — picks are based on buyer review data and community research.<br>
+  <strong>Affiliate disclosure:</strong> {src_disclosure} When you purchase through our links we earn a small commission at no extra cost to you. We are not paid by manufacturers to recommend specific products — picks are based on buyer review data and community research.<br>
   <span style="display:block;margin-top:.5rem">© {anio} TrendVortex.tech · <a href="{SITE_URL}">Home</a> · Updated {mes}</span>
 </footer>
 
