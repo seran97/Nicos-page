@@ -15,6 +15,8 @@ import feedparser, requests
 from pathlib import Path
 from dotenv import load_dotenv
 
+from keyword_filter import extraer_keyword, es_keyword_producto as _es_keyword_producto
+
 sys.stdout.reconfigure(encoding="utf-8")
 load_dotenv()
 
@@ -153,67 +155,9 @@ def tiene_intent(texto: str) -> str | None:
     return None
 
 # ══════════════════════════════════════════════════════════════════════════════
-# EXTRACCIÓN DE KEYWORD
-# ══════════════════════════════════════════════════════════════════════════════
-_STOPWORDS = {
-    "a","an","the","for","to","in","of","on","at","is","it","my","me","i",
-    "do","be","can","any","good","best","something","there","this","that",
-    "have","want","need","get","use","just","help","with","from","what",
-    "where","how","very","too","about","one","some","up","or","and","but",
-    "by","as","un","una","el","la","los","las","de","del","para","por",
-    "que","con","como","se","mi","no","si","es","en","al",
-}
-
-def _es_keyword_producto(kw: str) -> bool:
-    """Descarta keywords que claramente no son productos buscables en Trends."""
-    if len(kw) < 4 or len(kw) > 60:
-        return False
-    tokens = kw.split()
-    if len(tokens) < 2:
-        return False
-    # Palabras que indican que es una pregunta/consejo, no un producto
-    _NO_PRODUCTO = {
-        "advice","help","question","problem","issue","anyone","people","person",
-        "family","friend","should","would","could","trying","feeling","looking",
-        "going","think","know","tell","says","said","asked","time","year","day",
-        "month","week","hours","years","days","months","weeks","consejo","ayuda",
-        "alguien","familia","gente","persona","pregunta","problema","ciudad",
-        "germany","france","spain","italy","mexico","colombia","report","trip",
-        "megathread","june","july","august","september","october","november","december",
-        "january","february","march","april","may","update","story","experience",
-        "mod","mods","weekly","daily","thread","discussion","rant","vent","share",
-        "monday","tuesday","wednesday","thursday","friday","saturday","sunday",
-        "inside","scoop","piss","gremlin","impending","nino","niño","cottage",
-        "ahead","mass","fresh","give","your","take","been","seem","another",
-        "price","cost","cheap","expensive","sale","deal","discount","offer",
-        "recipe","cook","bake","make","prepare","ingredients","dish","meal",
-    }
-    if any(t.lower() in _NO_PRODUCTO for t in tokens):
-        return False
-    return True
-
-
-def extraer_keyword(titulo: str, intent_match: str) -> str:
-    limpio = re.sub(re.escape(intent_match), " ", titulo, flags=re.IGNORECASE)
-    limpio = re.sub(r"[^\w\s]", " ", limpio)
-    tokens = [w for w in limpio.split()
-              if w.lower() not in _STOPWORDS and len(w) > 2 and not w.isdigit()]
-
-    # Máx 3 palabras — keywords más largas no rankean en Trends
-    kw = " ".join(tokens[:3]).strip()
-
-    # Validar que parece un producto: ≥2 tokens, sin verbos comunes de pregunta
-    _VERBS = {"looking","using","trying","getting","buying","found","bought",
-               "busco","necesito","buscando","quiero","tengo","venden"}
-    clean_tokens = [t for t in kw.split() if t.lower() not in _VERBS]
-
-    if len(clean_tokens) >= 2:
-        return " ".join(clean_tokens[:3])
-    # Fallback: tomar las primeras 3 palabras sustantivas del título original
-    all_tokens = [w for w in re.sub(r"[^\w\s]"," ",titulo).split()
-                  if w.lower() not in _STOPWORDS and len(w) > 3 and not w.isdigit()]
-    return " ".join(all_tokens[:3]) if all_tokens else titulo[:30]
-
+# EXTRACCIÓN DE KEYWORD — ver keyword_filter.py (compartido con macro_radar.py
+# y orchestrator.py, para que ningún keyword de queja/troubleshooting se cuele
+# sin importar por cuál de los dos radares haya entrado).
 # ══════════════════════════════════════════════════════════════════════════════
 # GOOGLE TRENDS — validación con pytrends
 # ══════════════════════════════════════════════════════════════════════════════

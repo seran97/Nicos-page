@@ -34,6 +34,7 @@ from agents.designer_agent import DesignerAgent
 from memory.swarm_memory   import SwarmMemory, Episode
 from markets import get_active, ALL_MARKETS
 from learning.niche_learner import NicheLearner
+from keyword_filter import es_keyword_producto
 
 # ── Config ────────────────────────────────────────────────────────────────────
 LEADS_CSV     = Path("leads.csv")          # output de radar_nichos.py
@@ -139,6 +140,17 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
     commission= float(row.get("comision_pct", 3.0))
 
     if not keyword:
+        return None
+
+    # ── Skip si no parece un producto buscable ────────────────────────────────
+    # Filtro final: leads.csv recibe keywords de radar_nichos.py (Reddit) y de
+    # macro_radar.py (Gemini/Trends); ambos ya filtran, pero esto es la última
+    # barrera antes de gastar llamadas de Amazon/eBay/AliExpress y de Claude en
+    # un keyword tipo "internet not working" o "power was out" (fragmentos de
+    # queja de Reddit, no intención de compra) que termina en una página con un
+    # producto random sin relación.
+    if not es_keyword_producto(keyword):
+        log(f"Skip '{keyword}' — no parece un producto buscable", "⏭")
         return None
 
     # ── Skip si ya fue procesado ──────────────────────────────────────────────

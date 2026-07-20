@@ -36,6 +36,8 @@ load_dotenv()
 
 import requests
 
+from keyword_filter import es_keyword_producto
+
 # ── Patch urllib3 para pytrends ───────────────────────────────────────────────
 try:
     import urllib3.util.retry as _retry_mod
@@ -1608,7 +1610,12 @@ class MacroRadar:
             ])
             if not existe:
                 w.writeheader()
+            escritos, descartados = 0, 0
             for kw in keywords:
+                if not es_keyword_producto(kw.keyword):
+                    print(f"  [skip] '{kw.keyword}' no parece un producto buscable")
+                    descartados += 1
+                    continue
                 row = kw.to_lead_row()
                 w.writerow({
                     "subreddit":    row["subreddit"],
@@ -1622,7 +1629,9 @@ class MacroRadar:
                     "titulo":       row["titulo"],
                     "url":          row["url"],
                 })
-        print(f"  {len(keywords)} keywords añadidos a leads.csv")
+                escritos += 1
+        print(f"  {escritos} keywords añadidos a leads.csv"
+              + (f" ({descartados} descartados por no parecer producto)" if descartados else ""))
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
