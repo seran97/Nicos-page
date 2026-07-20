@@ -57,6 +57,10 @@ class DesignerAgent(BaseAgent):
           - seo_content: dict (opcional, del SEO agent: intro, bullets, faqs)
         """
         keyword     = context["keyword"]
+        # El keyword de origen a veces ya viene con "best" (ej. Reddit/Gemini
+        # sugieren "best dog food"), y todos los templates le anteponen "Best "
+        # de nuevo -> titulos/H1 como "Best Best Dog Food". Se limpia una vez acá.
+        keyword     = re.sub(r"^best\s+", "", keyword.strip(), flags=re.IGNORECASE)
         amazon      = context["amazon"]
         trend       = context.get("trend_payload", {})
         subreddit   = context.get("subreddit", "")

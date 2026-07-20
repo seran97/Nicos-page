@@ -15,15 +15,96 @@ SITE_URL = os.getenv("SITE_URL", "https://trendvortex.tech")
 DOCS_DIR = Path("docs")
 
 CATEGORY_META = {
-    "Kitchen & Dining":    {"slug": "best-kitchen-dining",      "emoji": "🍳", "desc": "air fryers, sous vide cookers, coffee makers, and more"},
-    "Amazon Games":        {"slug": "best-gaming-gear",         "emoji": "🎮", "desc": "mechanical keyboards, gaming mice, headsets, and accessories"},
-    "Automotive":          {"slug": "best-automotive",          "emoji": "🚗", "desc": "dashcams, car accessories, seat covers, and detailing kits"},
-    "Pet Supplies":        {"slug": "best-pet-supplies",        "emoji": "🐾", "desc": "dog food, cat litter, pet cameras, and more"},
-    "Sports & Outdoors":   {"slug": "best-sports-outdoors",     "emoji": "🏃", "desc": "running shoes, camping gear, yoga mats, and outdoor essentials"},
-    "Fashion":             {"slug": "best-fashion",             "emoji": "👔", "desc": "watches, wallets, earrings, and accessories"},
-    "Home Improvement":    {"slug": "best-home-improvement",    "emoji": "🏠", "desc": "robot vacuums, air purifiers, dehumidifiers, and more"},
-    "Luxury Beauty":       {"slug": "best-beauty",              "emoji": "✨", "desc": "serums, sunscreens, skincare routines, and more"},
-    "Toys & Baby":         {"slug": "best-baby-products",       "emoji": "👶", "desc": "baby monitors, strollers, toddler toys, and essentials"},
+    "Kitchen & Dining": {
+        "slug": "best-kitchen-dining", "emoji": "🍳",
+        "desc": "air fryers, sous vide cookers, coffee makers, and more",
+        "intro": "Kitchen appliances live or die on two things: how much counter space they eat up and whether they actually save you time on a weeknight. We weigh capacity against footprint, check how loud a unit runs, and flag models with parts that are a pain to hand-wash before they make this list.",
+        "tips": [
+            "Match capacity to household size — a 2-quart air fryer basket is fine solo, cramped for a family of four.",
+            "Dishwasher-safe parts matter more than an extra preset mode once you're cooking daily.",
+            "Check real decibel or noise complaints in reviews, not just wattage, before buying anything with a motor.",
+        ],
+    },
+    "Amazon Games": {
+        "slug": "best-gaming-gear", "emoji": "🎮",
+        "desc": "mechanical keyboards, gaming mice, headsets, and accessories",
+        "intro": "Switch type, polling rate, and driver software quality separate gear that lasts from gear you'll replace in a year. We favor hot-swappable keyboards and mice with onboard memory over gimmick RGB, and dock headsets a point for software that nags you to create an account.",
+        "tips": [
+            "Linear switches suit fast FPS play; tactile or clicky switches suit typing-heavy use — don't buy on looks alone.",
+            "Wireless latency has closed the gap with wired, but check reviews for the specific dongle/Bluetooth combo you'll use.",
+            "Onboard memory (no software required) beats cloud-profile gear if you switch PCs or consoles often.",
+        ],
+    },
+    "Automotive": {
+        "slug": "best-automotive", "emoji": "🚗",
+        "desc": "dashcams, car accessories, seat covers, and detailing kits",
+        "intro": "For dashcams and car electronics, footage quality in direct sunlight and at night matters more than the megapixel number on the box. For seat covers and detailing gear, fit-per-model and how well a product holds up after a dozen washes is what separates a good buy from a returned one.",
+        "tips": [
+            "For dashcams, check night-mode sample footage in reviews, not just the resolution spec on the listing.",
+            "Universal-fit seat covers rarely fit as advertised — check for your exact make/model in the Q&A section.",
+            "Loop-recording storage fills fast; buy a card rated for continuous write speeds, not a generic SD card.",
+        ],
+    },
+    "Pet Supplies": {
+        "slug": "best-pet-supplies", "emoji": "🐾",
+        "desc": "dog food, cat litter, pet cameras, and more",
+        "intro": "Food and litter picks come down to ingredient sourcing and how consistent a formula is batch to batch — a high review count with a stable rating is a stronger signal than a handful of five-star reviews. For gear like cameras and feeders, we weigh how often the app or connection actually causes complaints.",
+        "tips": [
+            "Read the first five ingredients on any food listing — a named protein should lead, not a generic 'meat meal.'",
+            "Grain-free isn't automatically healthier; talk to a vet before switching if your pet has no diagnosed allergy.",
+            "For connected gear (cameras, feeders), check reviews for app reliability, not just the hardware spec sheet.",
+        ],
+    },
+    "Sports & Outdoors": {
+        "slug": "best-sports-outdoors", "emoji": "🏃",
+        "desc": "running shoes, camping gear, yoga mats, and outdoor essentials",
+        "intro": "Running shoes and outdoor gear are the categories where fit and personal preference outweigh any single 'best' pick — cushioning, arch support, and terrain all shift the right answer. We prioritize items with a wide range of verified reviews across different use cases over a single flashy spec.",
+        "tips": [
+            "Running shoe sizing runs inconsistent across brands — check reviews for whether a model runs true, narrow, or wide.",
+            "For camping and outdoor gear, weight and pack size matter as much as durability if you're carrying it any distance.",
+            "A high star rating with a low review count is a weaker signal than a slightly lower rating with thousands of reviews.",
+        ],
+    },
+    "Fashion": {
+        "slug": "best-fashion", "emoji": "👔",
+        "desc": "watches, wallets, earrings, and accessories",
+        "intro": "For watches, wallets, and everyday accessories, material quality and hardware (clasps, movements, plating) tend to matter more long-term than the design trend of the moment. We look for consistent buyer feedback on how items hold up after a few months of daily use, not just first-impression photos.",
+        "tips": [
+            "Check plating/material specs closely — 'gold-tone' and 'gold-filled' age very differently over daily wear.",
+            "For watches, battery life and water-resistance rating matter more day-to-day than chronograph features you won't use.",
+            "Read reviews for hardware complaints (broken clasps, thinning straps) — those show up months after purchase, not in early reviews.",
+        ],
+    },
+    "Home Improvement": {
+        "slug": "best-home-improvement", "emoji": "🏠",
+        "desc": "robot vacuums, air purifiers, dehumidifiers, and more",
+        "intro": "Robot vacuums, air purifiers, and dehumidifiers are judged on maintenance cost as much as upfront price — filter and replacement-part costs can outweigh what you saved on the unit itself. We check CADR/coverage specs against the room size claimed, and flag units with app or mapping complaints.",
+        "tips": [
+            "Check CADR rating against your actual room size — most air purifiers are oversold on coverage area.",
+            "For robot vacuums, mapping/navigation complaints in reviews matter more than suction wattage on the spec sheet.",
+            "Factor in filter and replacement-part costs over a year, not just the sticker price of the unit.",
+        ],
+    },
+    "Luxury Beauty": {
+        "slug": "best-beauty", "emoji": "✨",
+        "desc": "serums, sunscreens, skincare routines, and more",
+        "intro": "For skincare, active ingredient concentration and how a formula plays with sensitive skin matter more than brand packaging. We look for products with ingredient lists that back up their marketing claims and flag anything with a pattern of reported irritation in reviews.",
+        "tips": [
+            "Check the active ingredient percentage, not just the marketing name — 'vitamin C serum' varies widely in strength.",
+            "Patch-test anything new for 48 hours, especially actives like retinol or high-percentage acids.",
+            "Mineral SPF (zinc oxide/titanium dioxide) tends to suit sensitive skin better than chemical sunscreen filters.",
+        ],
+    },
+    "Toys & Baby": {
+        "slug": "best-baby-products", "emoji": "👶",
+        "desc": "baby monitors, strollers, toddler toys, and essentials",
+        "intro": "Safety certifications and connection reliability come first for baby gear — a dropped video feed or a stroller recall matters more than any extra feature. We prioritize items with current safety-standard compliance and check reviews specifically for reliability complaints over time, not just week-one impressions.",
+        "tips": [
+            "Confirm current safety certifications (ASTM/JPMA for strollers, FCC for baby monitors) before anything else.",
+            "For video monitors, check reviews for connection drops over months of use, not just initial setup impressions.",
+            "Toddler toy durability complaints usually surface after a few weeks — weight recent reviews more than early ones.",
+        ],
+    },
 }
 
 
@@ -167,6 +248,12 @@ body{{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:va
 .stat-item{{text-align:center;min-width:80px}}
 .stat-num{{font-size:1.5rem;font-weight:900;color:var(--accent);display:block}}
 .stat-lbl{{font-size:.7rem;color:var(--text3)}}
+/* CATEGORY INTRO */
+.cat-intro{{max-width:760px;margin-bottom:28px}}
+.cat-intro p{{color:var(--text2);font-size:.95rem;margin-bottom:14px}}
+.cat-tips{{list-style:none;display:flex;flex-direction:column;gap:8px}}
+.cat-tips li{{font-size:.86rem;color:var(--text2);padding-left:22px;position:relative}}
+.cat-tips li::before{{content:"→";position:absolute;left:0;color:var(--accent);font-weight:900}}
 footer{{border-top:1px solid var(--border);background:var(--bg2);padding:24px;font-size:.76rem;color:var(--text3);text-align:center;line-height:1.8}}
 footer a{{color:var(--text3)}}
 </style>
@@ -197,6 +284,12 @@ footer a{{color:var(--text3)}}
     <div class="stat-item"><span class="stat-num">{total_reviews:,}</span><span class="stat-lbl">Buyer reviews</span></div>
     <div class="stat-item"><span class="stat-num">{sum(p["rating"] for p in products_sorted)/len(products_sorted):.1f}★</span><span class="stat-lbl">Avg rating</span></div>
     <div class="stat-item"><span class="stat-num">${min(p["precio"] for p in products_sorted):.0f}–${max(p["precio"] for p in products_sorted):.0f}</span><span class="stat-lbl">Price range</span></div>
+  </div>
+  <div class="cat-intro">
+    <p>{meta["intro"]}</p>
+    <ul class="cat-tips">
+      {"".join(f"<li>{tip}</li>" for tip in meta["tips"])}
+    </ul>
   </div>
   <div class="sec-eyebrow">All {cat_name} Picks</div>
   <h2>Our Top {cat_name} Recommendations for {anio}</h2>

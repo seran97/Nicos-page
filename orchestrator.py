@@ -17,7 +17,7 @@ Uso:
   python orchestrator.py --watch          # loop continuo (cada 6h)
 """
 from __future__ import annotations
-import os, sys, time, subprocess, argparse, collections
+import os, re, sys, time, subprocess, argparse, collections
 from pathlib import Path
 from datetime import datetime
 
@@ -130,6 +130,10 @@ def process_lead(row: pd.Series, agents: dict, memory: SwarmMemory,
     Retorna el slug desplegado, o None si se descartó.
     """
     keyword   = str(row.get("keyword", "")).strip()
+    # Reddit/Gemini a veces sugieren keywords que ya traen "best" (ej. "best
+    # dog food"), y como toda la cadena (SEOAgent, DesignerAgent, slug) le
+    # antepone "Best "/"best-" de nuevo, terminaba en paginas "best-best-x".
+    keyword   = re.sub(r"^best\s+", "", keyword, flags=re.IGNORECASE)
     subreddit = str(row.get("subreddit", ""))
     amazon_cat= str(row.get("amazon_cat", "General"))
     commission= float(row.get("comision_pct", 3.0))

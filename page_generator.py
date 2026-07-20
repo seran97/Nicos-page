@@ -27,6 +27,10 @@ def generar_pagina(keyword: str, amazon: dict, trends: dict,
     Genera docs/best-{slug}/index.html
     Retorna el slug de la página creada.
     """
+    # El keyword de origen a veces ya viene con "best" (ej. Reddit/Gemini
+    # sugieren "best dog food"), y el titulo/slug le antepone "Best "/"best-"
+    # de nuevo -> "Best Best Dog Food". Se limpia una vez acá.
+    keyword  = re.sub(r"^best\s+", "", keyword.strip(), flags=re.IGNORECASE)
     kw_slug  = slug(keyword)
     anio     = datetime.now().year
     mes      = datetime.now().strftime("%B %Y")
