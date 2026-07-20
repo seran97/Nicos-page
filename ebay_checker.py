@@ -20,6 +20,8 @@ from urllib.parse import quote_plus
 import requests
 from dotenv import load_dotenv
 
+from keyword_filter import es_producto_relevante
+
 load_dotenv()
 
 # ── Credenciales EPN (para el link de afiliado) ──────────────────────────────
@@ -121,6 +123,9 @@ def _search_finding_api(keyword: str) -> Optional[dict]:
                 if not (PRICE_MIN <= precio <= PRICE_MAX):
                     continue
                 titulo   = item["title"]
+                if not es_producto_relevante(keyword, titulo):
+                    print(f"  [eBay Browse] Descartado (sin relación con '{keyword}'): {titulo[:60]}")
+                    continue
                 item_url = item["itemWebUrl"]
                 imagen   = (item.get("image") or {}).get("imageUrl", "")
                 return {
@@ -176,13 +181,17 @@ def _search_rss(keyword: str) -> Optional[dict]:
                 precio = float(precio_m.group(1))
                 if not (PRICE_MIN <= precio <= PRICE_MAX):
                     continue
+                titulo_texto = titulo.group(1).strip()
+                if not es_producto_relevante(keyword, titulo_texto):
+                    print(f"  [eBay RSS] Descartado (sin relación con '{keyword}'): {titulo_texto[:60]}")
+                    continue
 
                 item_url = link.group(1).strip()
                 # Limpiar URL eBay (quitar parámetros de tracking internos)
                 item_url = re.sub(r"\?.*$", "", item_url) + "?mkevt=1"
 
                 return {
-                    "titulo":        titulo.group(1).strip(),
+                    "titulo":        titulo_texto,
                     "precio":        round(precio, 2),
                     "rating":        4.1,
                     "reviews":       50,

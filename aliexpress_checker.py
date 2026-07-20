@@ -17,6 +17,8 @@ from typing import Optional
 import requests
 from dotenv import load_dotenv
 
+from keyword_filter import es_producto_relevante
+
 load_dotenv()
 
 APP_KEY      = os.getenv("ALIEXPRESS_APP_KEY", "")
@@ -105,8 +107,12 @@ def check_aliexpress(keyword: str) -> Optional[dict]:
                     precio = float(item.get("target_sale_price") or item.get("sale_price") or 0)
                     if not (PRICE_MIN <= precio <= PRICE_MAX):
                         continue
+                    titulo = item.get("product_title", "").strip()
+                    if not es_producto_relevante(keyword, titulo):
+                        print(f"  [AliExpress] Descartado (sin relación con '{keyword}'): {titulo[:60]}")
+                        continue
                     result = {
-                        "titulo":        item.get("product_title", "").strip(),
+                        "titulo":        titulo,
                         "precio":        round(precio, 2),
                         "rating":        4.3,   # la Affiliate API no expone rating de producto
                         "reviews":       max(50, int(item.get("lastest_volume") or 0)),

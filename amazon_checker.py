@@ -10,6 +10,8 @@ import os, re, time, random, requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
+from keyword_filter import es_producto_relevante
+
 load_dotenv()
 
 RAINFOREST_KEY = os.getenv("RAINFOREST_KEY")
@@ -84,6 +86,9 @@ def _scrape_amazon(keyword: str, precio_min: float, precio_max: float,
                 continue
             if not titulo:
                 continue
+            if not es_producto_relevante(keyword, titulo):
+                print(f"  [Amazon-scrape] Descartado (sin relación con '{keyword}'): {titulo[:60]}")
+                continue
 
             return {
                 "asin":          asin,
@@ -152,6 +157,9 @@ def validar_amazon(keyword: str, precio_min=15, precio_max=250,
             if rating < rating_min:
                 continue
             if reviews < reviews_min:
+                continue
+            if not es_producto_relevante(keyword, titulo):
+                print(f"  [Amazon] Descartado (sin relación con '{keyword}'): {titulo[:60]}")
                 continue
 
             return {

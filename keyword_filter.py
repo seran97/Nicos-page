@@ -113,3 +113,29 @@ def es_keyword_producto(kw: str) -> bool:
     if any(t.lower() in NO_PRODUCTO for t in tokens):
         return False
     return True
+
+
+def es_producto_relevante(keyword: str, titulo: str, min_overlap: float = 0.4) -> bool:
+    """
+    Verifica que el título del producto devuelto por el buscador (Amazon/eBay/
+    AliExpress) realmente tenga que ver con el keyword buscado.
+
+    Por qué existe: amazon_checker/ebay_checker/aliexpress_checker aceptaban
+    el primer resultado que cumpliera precio/rating, sin chequear si el
+    título tenía relación con la búsqueda — para keywords raros ("replacing
+    head unit", "internet not working") el buscador devolvía lo que fuera
+    (un cabezal de cepillo de dientes, medias de red) y la página se
+    publicaba con ese producto sin ninguna relación con el título.
+
+    Exige que al menos `min_overlap` (40% por default) de las palabras
+    significativas del keyword aparezcan literalmente en el título del
+    producto — simple, sin dependencias, y suficiente para descartar
+    resultados completamente ajenos sin ser tan estricto que rechace
+    coincidencias reales con nombres de producto largos/verborrágicos.
+    """
+    kw_tokens = {t for t in re.findall(r"[a-z0-9]+", keyword.lower()) if len(t) > 2}
+    if not kw_tokens:
+        return True
+    titulo_tokens = set(re.findall(r"[a-z0-9]+", titulo.lower()))
+    overlap = len(kw_tokens & titulo_tokens) / len(kw_tokens)
+    return overlap >= min_overlap
