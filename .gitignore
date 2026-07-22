@@ -13,6 +13,10 @@ env/
 
 # Secrets
 .env
+secrets/
+indexing_quota.json
+indexing_notified.json
+indexing_status.json
 
 # Runtime files
 leads.csv
@@ -22,3 +26,6 @@ trend_history.json
 
 # Runtime/cache
 macro_queue.json
+*.log
+output_test.txt
+learning/batches/

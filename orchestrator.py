@@ -35,6 +35,7 @@ from memory.swarm_memory   import SwarmMemory, Episode
 from markets import get_active, ALL_MARKETS
 from learning.niche_learner import NicheLearner
 from keyword_filter import es_keyword_producto
+from indexing_api import notify_urls, notify_backlog
 
 # ── Config ────────────────────────────────────────────────────────────────────
 LEADS_CSV     = Path("leads.csv")          # output de radar_nichos.py
@@ -397,6 +398,15 @@ def run_once(limit: int = 0, dry_run: bool = False, markets_override: list[str] 
     # ── Deploy ────────────────────────────────────────────────────────────────
     if all_deployed and not dry_run:
         deploy_github(all_deployed, dry_run=dry_run)
+        notify_urls([f"{SITE_URL}/{s}/" for s in all_deployed])
+
+    # ── Backlog de indexación ────────────────────────────────────────────────
+    # Aprovecha la cuota diaria que sobre (tras notificar lo recién publicado)
+    # para ir poniendo al día las páginas históricas que nunca se notificaron
+    # a la Indexing API (ej. las generadas antes de tener esta integración).
+    if not dry_run:
+        all_pages = sorted(p.parent.name for p in DOCS_DIR.glob("*/index.html"))
+        notify_backlog([f"{SITE_URL}/{slug}/" for slug in all_pages])
         for full_slug in all_deployed:
             keyword = full_slug.split("/")[-1].replace("-", " ")
             memory.add(Episode(

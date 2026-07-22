@@ -121,6 +121,32 @@ def iniciar_informe_diario():
     t.start()
 
 
+# ── Agente de indexación (hilo separado) ─────────────────────────────────────
+
+def _indexing_agent_loop():
+    """Corre el agente de indexación una vez al iniciar y luego cada 24h."""
+    while True:
+        try:
+            from indexing_agent import run as run_indexing_agent
+            summary = run_indexing_agent()
+            telegram(
+                f"🔎 <b>Indexación — estado</b>\n"
+                f"{summary['indexed_total']}/{summary['total_pages']} páginas indexadas "
+                f"(meta: {summary['daily_goal']}/día)\n"
+                f"Chequeadas hoy: {summary['checked_today']} · Mejoradas con Claude: {summary['improved_today']}\n"
+                f"Pendientes: {summary['pending']}"
+            )
+        except Exception as e:
+            print(f"  [INDEXING-AGENT] Error: {e}")
+            alerta_error("indexing_agent", str(e))
+        time.sleep(24 * 3600)
+
+
+def iniciar_indexing_agent():
+    t = threading.Thread(target=_indexing_agent_loop, daemon=True)
+    t.start()
+
+
 # ── Notificaciones ────────────────────────────────────────────────────────────
 
 def alerta_inicio():
@@ -288,6 +314,7 @@ def main(limit: int = 0, markets_str: str = "", once: bool = False):
 
     iniciar_heartbeat()
     iniciar_informe_diario()
+    iniciar_indexing_agent()
     alerta_inicio()
 
     ciclo = 1

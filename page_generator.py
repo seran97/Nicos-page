@@ -309,21 +309,42 @@ def actualizar_sitemap():
     # excluir el index raíz
     pages = [p for p in pages if p.parent != DOCS_DIR]
 
+    def lastmod(p: Path) -> str:
+        return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
+
     urls = "\n".join(
         f'  <url>'
         f'<loc>{SITE_URL}/{p.parent.name}/</loc>'
+        f'<lastmod>{lastmod(p)}</lastmod>'
         f'<changefreq>weekly</changefreq>'
         f'<priority>0.8</priority>'
         f'</url>'
         for p in pages
     )
+    root_lastmod = datetime.now().strftime("%Y-%m-%d")
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>{SITE_URL}/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>{SITE_URL}/</loc><lastmod>{root_lastmod}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 {urls}
 </urlset>"""
     (DOCS_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
     print(f"  [SITEMAP] {len(pages)} páginas indexadas")
+    ping_sitemap()
+
+
+def ping_sitemap():
+    """Avisa a Google (ping HTTP clásico) de que el sitemap cambió."""
+    import requests
+    sitemap_url = f"{SITE_URL}/sitemap.xml"
+    try:
+        resp = requests.get(
+            "https://www.google.com/ping",
+            params={"sitemap": sitemap_url},
+            timeout=10,
+        )
+        print(f"  [SITEMAP] Ping a Google: HTTP {resp.status_code}")
+    except requests.RequestException as e:
+        print(f"  [SITEMAP] ERROR en ping a Google: {e}")
 
 
 def actualizar_index_html():
