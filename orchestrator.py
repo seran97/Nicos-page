@@ -36,6 +36,7 @@ from markets import get_active, ALL_MARKETS
 from learning.niche_learner import NicheLearner
 from keyword_filter import es_keyword_producto
 from indexing_api import notify_urls, notify_backlog
+from pinterest_poster import create_pin
 
 # ── Config ────────────────────────────────────────────────────────────────────
 LEADS_CSV     = Path("leads.csv")          # output de radar_nichos.py
@@ -334,6 +335,18 @@ def _seo_and_design(keyword, product, trend_result, subreddit, amazon_cat,
             log(f"Página lista (⚠ fallback, sin Claude) → {url}", "✓")
         else:
             log(f"Página lista → {url}", "✓")
+
+        if url:
+            try:
+                create_pin(
+                    page_url=url,
+                    image_url=product.get("imagen_url", ""),
+                    title=seo_result.payload.get("title", f"Best {keyword}"),
+                    description=seo_result.payload.get("meta_description", keyword),
+                )
+            except Exception as e:
+                log(f"Pinterest: no se pudo publicar el pin ({e})", "⚠")
+
         return slug
     else:
         log("Dry-run: saltar generación HTML", "⏭")

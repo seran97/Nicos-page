@@ -359,6 +359,14 @@ def main(limit: int = 0, markets_str: str = "", once: bool = False):
             deployed, skipped = correr_enjambre(limit, markets_list)
             alerta_swarm_resumen(deployed, skipped)
 
+        # ── Reddit: oportunidades de comentario en hilos existentes ────────────
+        try:
+            from reddit_comment_bot import run_ciclo as run_reddit_comment_bot
+            run_reddit_comment_bot()
+        except Exception as e:
+            print(f"  [RedditBot] Error: {e}")
+            alerta_error("reddit_comment_bot", str(e))
+
         if once:
             if ciclo % SWARM_CADA_N_CICLOS != 0:
                 deployed, skipped = correr_enjambre(limit, markets_list)

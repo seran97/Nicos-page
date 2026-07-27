@@ -475,6 +475,23 @@ class GTrendsRSSSource:
 
     # ── fallback: Gemini genera trending keywords por estacionalidad ──────────
     @staticmethod
+    def _already_used_keywords(limit: int = 250) -> list[str]:
+        """
+        Lee swarm_memory.json directamente (sin importar memory.SwarmMemory, para
+        evitar ciclos de import) y devuelve los keywords ya procesados/descartados,
+        para que el fallback de Gemini no los vuelva a sugerir.
+        """
+        try:
+            path = Path(__file__).resolve().parent / "swarm_memory.json"
+            data = json.loads(path.read_text(encoding="utf-8"))
+            seen = {str(e.get("keyword", "")).strip().lower()
+                    for e in data if e.get("keyword")}
+            seen.discard("")
+            return sorted(seen)[-limit:]
+        except Exception:
+            return []
+
+    @staticmethod
     def gemini_trending(month: int = None, top_n: int = 20) -> list[tuple]:
         """
         Usa Gemini Flash (REST API directa) para sugerir trending Amazon keywords.
@@ -493,13 +510,24 @@ class GTrendsRSSSource:
         }
         mon_name = month_names.get(month, "June")
         year     = datetime.now().year
+        day      = datetime.now().day
+
+        excluded = GTrendsRSSSource._already_used_keywords()
+        exclude_clause = ""
+        if excluded:
+            exclude_clause = (
+                "\nThese keywords are ALREADY covered — do NOT suggest them or close "
+                "variants of them again:\n" + ", ".join(excluded) + "\n"
+            )
 
         prompt = (
-            f"It is {mon_name} {year}. "
-            f"List {top_n} specific Amazon product search keywords trending RIGHT NOW "
-            f"due to seasonal demand or consumer trends. "
+            f"It is day {day} of {mon_name} {year}. "
+            f"List {top_n} specific, DIVERSE Amazon product search keywords trending RIGHT NOW "
+            f"due to seasonal demand or consumer trends. Vary sub-niches and angles each time "
+            f"you're asked instead of returning the same obvious list. "
             f"Valid categories: Kitchen & Dining, Amazon Games, Luxury Beauty, "
-            f"Pet Supplies, Sports & Outdoors, Automotive, Home Improvement, Fashion, Toys & Baby. "
+            f"Pet Supplies, Sports & Outdoors, Automotive, Home Improvement, Fashion, Toys & Baby."
+            f"{exclude_clause}"
             f'Return ONLY a JSON array: [{{"keyword":"portable fan","score":82,"category":"Home Improvement"}},...] '
             f"Score 0-100 = current demand. No explanation outside JSON."
         )
@@ -512,7 +540,7 @@ class GTrendsRSSSource:
                 json={
                     "contents": [{"parts": [{"text": prompt}]}],
                     "generationConfig": {
-                        "temperature":     0.3,
+                        "temperature":     0.9,
                         "maxOutputTokens": 2048,
                         "thinkingConfig":  {"thinkingBudget": 0},
                     },

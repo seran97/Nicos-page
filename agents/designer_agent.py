@@ -198,6 +198,15 @@ PAGE STRUCTURE (in this exact order, no sections missing):
 1. Sticky header: "TrendVortex" logo (Trend+<span style=color:#FF9900>Vortex</span>), affiliate disclaimer right
 2. Hero section: h1 "Best {keyword.title()} in {anio}", subtitle with review count, trust badges, CTA button to #top-pick
 3. Methodology box: green left border, "How we chose this" paragraph mentioning {amazon['reviews']:,} reviews and r/{subreddit}
+3b. "Real story" section: a first-person anecdote (4-6 sentences), casual and a
+   bit rambly, NOT ad copy. Structure: (a) a relatable everyday complication or
+   mess-up related to {keyword} / {amazon_cat} — something specific that went
+   wrong or was more annoying than expected, told with a little humor; (b)
+   briefly mention comparing a couple of options or asking around; (c) land on
+   how things got easier once landing on this pick, crediting it naturally, not
+   as a hard sell. Style it like a blog "why I wrote this" box — light background
+   card, maybe a small quote-mark accent, NOT the same visual style as the
+   methodology box (differentiate them). Write in the site's content language.
 4. Section id="top-pick": "Editor's Choice" orange badge, product card (image left, info right), price ${amazon['precio']:.2f}, {amazon['rating']}★ stars, orange CTA full-width button.
    IMPORTANT — every click must convert: wrap the product image AND the product title in <a href="{amazon['affiliate_url']}" rel="nofollow sponsored" target="_blank"> so clicking either one also goes straight to {src_name} (not just the button). Use cursor:pointer and a subtle hover effect (e.g. slight border/scale) on the image and title to signal they are clickable.
 5. Section: Pros/Cons grid (2 columns), then "Who this is NOT for" box
@@ -225,7 +234,7 @@ Return ONLY complete HTML starting with <!DOCTYPE html>. No markdown, no explana
         try:
             message = self._client.messages.create(
                 model=CLAUDE_MODEL,
-                max_tokens=12000,
+                max_tokens=16000,
                 temperature=0.3,
                 messages=[
                     {"role": "user", "content": prompt}
