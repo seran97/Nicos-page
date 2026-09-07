@@ -333,18 +333,30 @@ def actualizar_sitemap():
 
 
 def ping_sitemap():
-    """Avisa a Google (ping HTTP clásico) de que el sitemap cambió."""
-    import requests
-    sitemap_url = f"{SITE_URL}/sitemap.xml"
+    """
+    Avisa a Google de que el sitemap cambió, vía Search Console API.
+    (El ping HTTP clásico a google.com/ping?sitemap= fue descontinuado por
+    Google en 2023 y siempre devolvía 404 — por eso Google no estaba
+    releyendo el sitemap seguido.)
+    """
+    sa_path = os.getenv("GOOGLE_INDEXING_SA_JSON", "secrets/gcp-indexing-sa.json")
+    if not Path(sa_path).exists():
+        print(f"  [SITEMAP] WARN: {sa_path} no encontrado — no se pudo notificar a Google")
+        return
+    site_url = SITE_URL.rstrip("/") + "/"
+    sitemap_url = site_url + "sitemap.xml"
     try:
-        resp = requests.get(
-            "https://www.google.com/ping",
-            params={"sitemap": sitemap_url},
-            timeout=10,
+        from google.oauth2 import service_account
+        from googleapiclient.discovery import build
+        creds = service_account.Credentials.from_service_account_file(
+            sa_path, scopes=["https://www.googleapis.com/auth/webmasters"]
         )
-        print(f"  [SITEMAP] Ping a Google: HTTP {resp.status_code}")
-    except requests.RequestException as e:
-        print(f"  [SITEMAP] ERROR en ping a Google: {e}")
+        build("searchconsole", "v1", credentials=creds).sitemaps().submit(
+            siteUrl=site_url, feedpath=sitemap_url
+        ).execute()
+        print("  [SITEMAP] Resubmitido a Google via Search Console API")
+    except Exception as e:
+        print(f"  [SITEMAP] ERROR notificando a Google: {e}")
 
 
 def actualizar_index_html():
@@ -367,14 +379,28 @@ def actualizar_index_html():
     cards = ""
     for p in pages:
         slug  = p.parent.name
-        nombre = slug.replace("best-", "").replace("-", " ").title()
+        # Las guías informativas (gen_info_pages.py) llevan este badge en el
+        # HTML — se detecta por contenido, no por el slug, porque muchos
+        # slugs de guía no empiezan con "how-to-" (p.ej. "gold-tone-vs-...").
+        is_guide = 'badge-guide' in p.read_text(encoding="utf-8", errors="replace")
+        if is_guide:
+            titulo = p.parent.name  # se sobreescribe abajo con el <title> real
+            m = re.search(r"<h1>(.*?)</h1>", p.read_text(encoding="utf-8", errors="replace"), re.S)
+            titulo = re.sub(r"<[^>]+>", "", m.group(1)).strip() if m else slug.replace("-", " ").title()
+            subtitulo = "Free guide · No product links"
+            cta = "Read the Guide →"
+        else:
+            nombre = slug.replace("best-", "").replace("-", " ").title()
+            titulo = f"Best {nombre}"
+            subtitulo = "Top picks · Reddit validated"
+            cta = "See Recommendations →"
         cards += (
             f'<a href="/{slug}/" class="product-card">'
             f'<div class="pc-img"></div>'
             f'<div class="pc-info">'
-            f'<h3 class="pc-title">Best {nombre}</h3>'
-            f'<p class="pc-sub">Top picks · Reddit validated</p>'
-            f'<span class="pc-cta">See Recommendations →</span>'
+            f'<h3 class="pc-title">{titulo}</h3>'
+            f'<p class="pc-sub">{subtitulo}</p>'
+            f'<span class="pc-cta">{cta}</span>'
             f'</div></a>\n'
         )
 
