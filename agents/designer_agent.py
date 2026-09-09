@@ -74,9 +74,7 @@ class DesignerAgent(BaseAgent):
             ),
         )
         api_key = os.getenv("ANTHROPIC_API_KEY")
-        if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY no encontrada en .env")
-        self._client = anthropic.Anthropic(api_key=api_key)
+        self._client = anthropic.Anthropic(api_key=api_key) if api_key else None
 
     def act(self, context: dict[str, Any]) -> AgentResult:
         """
@@ -108,8 +106,11 @@ class DesignerAgent(BaseAgent):
         # Determinar paleta según categoría
         palette = self._get_palette(amazon_cat)
 
-        html = self._generate_with_claude(
-            keyword, amazon, trend, subreddit, amazon_cat, seo_content, palette
+        html = (
+            self._generate_with_claude(
+                keyword, amazon, trend, subreddit, amazon_cat, seo_content, palette
+            )
+            if self._client else None
         )
 
         used_fallback = html is None
@@ -634,8 +635,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{{
 
     def _update_sitemap_and_index(self):
         try:
-            from page_generator import actualizar_sitemap, actualizar_index_html
+            from page_generator import actualizar_sitemap, actualizar_index_html, actualizar_rss
             actualizar_sitemap()
             actualizar_index_html()
+            actualizar_rss()
         except Exception:
             pass

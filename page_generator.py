@@ -332,6 +332,78 @@ def actualizar_sitemap():
     ping_sitemap()
 
 
+def actualizar_rss():
+    """
+    Regenera docs/rss.xml — el feed RSS 2.0 del sitio, usado como "fuente de
+    la verdad" por el pipeline de distribución social/newsletter (ver
+    social_syndication.py y rss_feed_reader.py): en vez de que cada
+    integración re-descubra qué hay publicado escaneando docs/ a mano, todas
+    leen este feed con feedparser. Se excluyen hub/vs/guías informativas
+    (mismo criterio que gen_hub_pages.py) para no promover contenido sin
+    producto/afiliado real.
+    """
+    HUB_SLUGS = {
+        "best-kitchen-dining", "best-gaming-gear", "best-automotive",
+        "best-pet-supplies", "best-sports-outdoors", "best-fashion",
+        "best-home-improvement", "best-beauty", "best-baby-products",
+    }
+
+    def _extract_meta(p: Path) -> dict:
+        html = p.read_text(encoding="utf-8", errors="replace")
+        title_m = re.search(r"<title>([^<]+)</title>", html)
+        desc_m  = re.search(r'name="description"\s+content="([^"]+)"', html)
+        title = title_m.group(1).strip() if title_m else p.parent.name
+        desc  = desc_m.group(1).strip() if desc_m else ""
+        return {"title": title, "description": desc, "html": html}
+
+    pages = sorted(DOCS_DIR.glob("*/index.html"), key=lambda p: p.stat().st_mtime, reverse=True)
+    pages = [p for p in pages if p.parent != DOCS_DIR]
+    filtered = []
+    for p in pages:
+        name = p.parent.name
+        if name in HUB_SLUGS or "-vs-" in name:
+            continue
+        filtered.append(p)
+    pages = filtered
+
+    def _escape(s: str) -> str:
+        return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                 .replace('"', "&quot;"))
+
+    items = []
+    for p in pages:
+        if len(items) >= 200:  # el feed no necesita las 660+, solo lo reciente
+            break
+        slug = p.parent.name
+        meta = _extract_meta(p)
+        if "badge-guide" in meta["html"]:
+            continue  # guía informativa (gen_info_pages.py) — sin afiliado, no va en este feed
+        pub_date = datetime.fromtimestamp(p.stat().st_mtime).strftime("%a, %d %b %Y %H:%M:%S +0000")
+        items.append(
+            "  <item>"
+            f"<title>{_escape(meta['title'])}</title>"
+            f"<link>{SITE_URL}/{slug}/</link>"
+            f"<guid isPermaLink=\"true\">{SITE_URL}/{slug}/</guid>"
+            f"<description>{_escape(meta['description'])}</description>"
+            f"<pubDate>{pub_date}</pubDate>"
+            "</item>"
+        )
+
+    build_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>TrendVortex</title>
+  <link>{SITE_URL}</link>
+  <description>Últimas reseñas y guías publicadas en TrendVortex.tech</description>
+  <lastBuildDate>{build_date}</lastBuildDate>
+{chr(10).join(items)}
+</channel>
+</rss>"""
+    (DOCS_DIR / "rss.xml").write_text(xml, encoding="utf-8")
+    print(f"  [RSS] {len(items)} páginas en el feed (docs/rss.xml)")
+
+
 def ping_sitemap():
     """
     Avisa a Google de que el sitemap cambió, vía Search Console API.
