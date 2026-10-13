@@ -308,6 +308,8 @@ def actualizar_sitemap():
     pages = sorted(DOCS_DIR.glob("*/index.html"))
     # excluir el index raíz
     pages = [p for p in pages if p.parent != DOCS_DIR]
+    # excluir páginas marcadas noindex (duplicados / baja calidad, ver noindex_paginas.json)
+    pages = [p for p in pages if 'content="noindex' not in p.read_text(encoding="utf-8", errors="replace")[:2000]]
 
     def lastmod(p: Path) -> str:
         return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
@@ -378,6 +380,8 @@ def actualizar_rss():
         meta = _extract_meta(p)
         if "badge-guide" in meta["html"]:
             continue  # guía informativa (gen_info_pages.py) — sin afiliado, no va en este feed
+        if 'content="noindex' in meta["html"][:2000]:
+            continue  # duplicado / baja calidad (noindex_paginas.json)
         pub_date = datetime.fromtimestamp(p.stat().st_mtime).strftime("%a, %d %b %Y %H:%M:%S +0000")
         items.append(
             "  <item>"
