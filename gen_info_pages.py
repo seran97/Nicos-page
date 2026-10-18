@@ -59,6 +59,52 @@ TOPIC_CATEGORY = {
     "baby-monitor-safety-certifications-explained": ("Toys & Baby", "best-baby-products"),
     "how-to-childproof-home-room-by-room":          ("Toys & Baby", "best-baby-products"),
     "how-to-check-stroller-safety-recalls":         ("Toys & Baby", "best-baby-products"),
+
+    # 36 guías nuevas (2026-10-18)
+    "burr-vs-blade-coffee-grinder-explained":       ("Kitchen & Dining", "best-kitchen-dining"),
+    "espresso-machine-bar-pressure-explained":      ("Kitchen & Dining", "best-kitchen-dining"),
+    "how-to-clean-copper-cookware-tin-vs-steel-lined":("Kitchen & Dining", "best-kitchen-dining"),
+    "wire-grill-brush-safety-and-grate-cleaning":   ("Kitchen & Dining", "best-kitchen-dining"),
+
+    "monitor-refresh-rate-vs-response-time":        ("Amazon Games", "best-gaming-gear"),
+    "ips-vs-va-vs-oled-gaming-monitor-panels":      ("Amazon Games", "best-gaming-gear"),
+    "gaming-headset-virtual-surround-explained":    ("Amazon Games", "best-gaming-gear"),
+    "mouse-dpi-vs-in-game-sensitivity-explained":   ("Amazon Games", "best-gaming-gear"),
+
+    "jump-starter-peak-amps-vs-cranking-amps":      ("Automotive", "best-automotive"),
+    "how-to-use-portable-tire-inflator-correct-psi":("Automotive", "best-automotive"),
+    "dash-cam-parking-mode-hardwiring-guide":       ("Automotive", "best-automotive"),
+    "car-vacuum-suction-pa-vs-air-watts":           ("Automotive", "best-automotive"),
+
+    "how-to-fit-a-dog-harness-front-vs-back-clip":  ("Pet Supplies", "best-pet-supplies"),
+    "clumping-vs-non-clumping-cat-litter":          ("Pet Supplies", "best-pet-supplies"),
+    "how-to-transition-dog-to-new-food":            ("Pet Supplies", "best-pet-supplies"),
+    "how-to-keep-your-dog-cool-in-hot-weather":     ("Pet Supplies", "best-pet-supplies"),
+
+    "tent-waterproof-rating-hydrostatic-head-explained":("Sports & Outdoors", "best-sports-outdoors"),
+    "inflatable-paddle-board-psi-thickness-guide":  ("Sports & Outdoors", "best-sports-outdoors"),
+    "how-to-hang-a-camping-hammock-safely":         ("Sports & Outdoors", "best-sports-outdoors"),
+    "running-shoe-drop-and-stack-height-explained": ("Sports & Outdoors", "best-sports-outdoors"),
+
+    "watch-water-resistance-ratings-explained":     ("Fashion", "best-fashion"),
+    "how-to-wash-linen-without-shrinking":          ("Fashion", "best-fashion"),
+    "sterling-silver-tarnish-cleaning-guide":       ("Fashion", "best-fashion"),
+    "how-to-make-swimsuits-last-chlorine-sun-care": ("Fashion", "best-fashion"),
+
+    "true-hepa-vs-hepa-type-filters-explained":     ("Home Improvement", "best-home-improvement"),
+    "robot-vacuum-suction-pa-ratings-explained":    ("Home Improvement", "best-home-improvement"),
+    "ideal-indoor-humidity-level-to-prevent-mold":  ("Home Improvement", "best-home-improvement"),
+    "do-bug-zappers-kill-mosquitoes":               ("Home Improvement", "best-home-improvement"),
+
+    "spf-broad-spectrum-how-much-sunscreen-to-apply":("Luxury Beauty", "best-beauty"),
+    "skincare-layering-order-morning-and-night":    ("Luxury Beauty", "best-beauty"),
+    "do-under-eye-patches-work-dark-circles-puffiness":("Luxury Beauty", "best-beauty"),
+    "retinol-vs-retinal-vs-bakuchiol-differences":  ("Luxury Beauty", "best-beauty"),
+
+    "how-to-read-toy-age-labels-small-parts-warnings":("Toys & Baby", "best-baby-products"),
+    "wifi-vs-non-wifi-baby-monitor-privacy-security":("Toys & Baby", "best-baby-products"),
+    "toddler-water-play-safety-water-tables-pools": ("Toys & Baby", "best-baby-products"),
+    "upf-rash-guards-baby-sun-protection-explained":("Toys & Baby", "best-baby-products"),
 }
 
 
@@ -91,6 +137,8 @@ def top_reviews_for_category(cat_name: str, n: int = 3) -> list[dict]:
             continue
         if page_dir.name in TOPIC_CATEGORY or "-vs-" in page_dir.name:
             continue
+        if 'content="noindex' in (page_dir / "index.html").read_text(encoding="utf-8", errors="replace")[:2000]:
+            continue  # duplicados / baja calidad (noindex_paginas.json): no enlazarlos desde guías
         data = extract_product(page_dir / "index.html")
         if data and data["amazon_cat"] == cat_name and data["titulo"]:
             data["slug"] = page_dir.name
@@ -236,9 +284,12 @@ def main():
         return
     all_content = json.loads(INFO_CONTENT_FILE.read_text(encoding="utf-8"))
 
+    solo = set(sys.argv[1:])  # opcional: generar solo estos slugs
     generated = 0
     for content in all_content:
         slug = content["slug"]
+        if solo and slug not in solo:
+            continue
         if slug not in TOPIC_CATEGORY:
             print(f"  SKIP {slug} — not in TOPIC_CATEGORY mapping")
             continue

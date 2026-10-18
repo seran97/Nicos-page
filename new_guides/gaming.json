@@ -1,0 +1,170 @@
+[
+ {
+  "slug": "monitor-refresh-rate-vs-response-time",
+  "title": "Refresh Rate vs Response Time: What Gaming Monitors Need",
+  "meta_description": "Refresh rate and response time measure different things. Learn how Hz, GtG, MPRT, overdrive and VRR affect motion clarity on a gaming monitor.",
+  "intro": "Gaming monitor spec sheets lead with two numbers that are easy to confuse: refresh rate, quoted in hertz, and response time, quoted in milliseconds. Both affect how smooth and sharp motion looks, but they describe different parts of the display pipeline, and a high figure in one cannot make up for a weak result in the other. Knowing what each number measures, and how marketing stretches them, makes it easier to compare monitors and set one up correctly.",
+  "sections": [
+   {
+    "heading": "What Refresh Rate Actually Measures",
+    "body": "Refresh rate is how many times per second the monitor draws a new image, measured in hertz (Hz). A 60 Hz panel refreshes every 16.7 milliseconds, a 144 Hz panel every 6.9 ms, a 240 Hz panel every 4.2 ms and a 360 Hz panel every 2.8 ms. Those intervals are the frame time, and they explain why higher refresh rates feel more responsive: new information reaches the screen sooner, and moving objects advance in smaller steps between frames, so motion looks smoother and easier to track.\n\nA high refresh rate only helps if the computer or console can deliver a matching frame rate. A graphics card producing 90 frames per second on a 240 Hz monitor still shows only 90 unique images each second; the monitor simply repeats some of them. The gains also shrink as numbers climb. Moving from 60 to 144 Hz cuts frame time by about 9.8 ms, while moving from 240 to 360 Hz saves only about 1.4 ms. That is why 144 to 165 Hz is a sensible target for most players, and very high refresh rates make the most sense for competitive shooters running at consistently high frame rates."
+   },
+   {
+    "heading": "What Response Time Measures, and Why GtG Numbers Mislead",
+    "body": "Response time describes how quickly an individual pixel changes from one shade to another. The most common figure is gray-to-gray (GtG), which measures the transition between two gray levels, usually timed from 10 percent to 90 percent of the change so the slow start and finish are ignored. If pixels cannot finish changing before the next refresh arrives, the result is a smeared trail behind moving objects, often called ghosting.\n\nThe headline number on the box is usually the fastest transition under the most aggressive overdrive setting, not an average across all transitions. Overdrive works by briefly applying extra voltage so the liquid crystals move faster, but pushed too far it overshoots the target shade and creates bright or dark halos known as inverse ghosting or overshoot. A monitor advertised at 1 ms may only reach that figure in a mode that looks worse in practice. The useful rule is that typical pixel transitions should comfortably fit inside the frame time: a 240 Hz monitor has about 4.2 ms per frame, so real-world transitions must be faster than that to look clean. Independent reviews with full response-time tables give a far more reliable picture."
+   },
+   {
+    "heading": "Motion Blur, MPRT and Backlight Strobing",
+    "body": "Even a monitor with instant pixel transitions shows some blur, because most displays use sample-and-hold: each frame stays lit for the entire refresh interval while your eyes keep moving to follow an object. The eye smears that static image across the retina, and the perceived blur is tied to how long each frame stays on screen. This is what Moving Picture Response Time (MPRT) tries to capture, and it is why raising the refresh rate reduces blur even on a very fast panel.\n\nBacklight strobing, sold under names such as ULMB, ELMB or simply motion blur reduction, attacks the same problem differently. The backlight flashes briefly once per frame and stays dark in between, so each image is shown for only a fraction of the frame time, much like an old CRT. Motion becomes noticeably crisper, but brightness drops, some viewers notice flicker, and many monitors cannot strobe and use variable refresh rate at the same time. Strobing generally works best when the frame rate stays locked at or above the refresh rate. When a spec sheet quotes a very low MPRT figure, it is usually measured with strobing enabled, so check which mode the number refers to."
+   },
+   {
+    "heading": "Variable Refresh Rate and Practical Setup Tips",
+    "body": "Variable refresh rate (VRR) lets the monitor adjust its refresh timing to match the frames the graphics card actually produces. Without it, a mismatch between frame rate and refresh rate causes either screen tearing, where parts of two frames appear at once, or stutter and added input lag when traditional V-Sync forces the card to wait. Common implementations are AMD FreeSync, NVIDIA G-Sync and G-Sync Compatible, and the VRR feature of HDMI 2.1 used by current consoles. Each monitor supports VRR only within a range, for example 48 to 144 Hz, and low framerate compensation can repeat frames when a game drops below that floor.\n\nA few settings make a large difference. Confirm the operating system is actually running the monitor at its maximum refresh rate, since many systems default to 60 Hz. Use a cable and port that support the full refresh rate at your resolution; DisplayPort or HDMI 2.1 is usually required for high refresh rates at 1440p and 4K. Try a middle overdrive setting first, because the strongest mode often adds overshoot. Finally, capping the frame rate a few frames below the maximum refresh rate is a common way to keep VRR active and avoid V-Sync latency."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Is a higher refresh rate or a lower response time more important?",
+    "a": "They matter together. Refresh rate sets how often new frames appear, while response time decides whether pixels finish changing before the next frame arrives. A 240 Hz monitor with slow pixel transitions will look smeared, and a fast panel limited to 60 Hz will still feel choppy. For most players, a 144 to 165 Hz monitor whose real transitions fit within its frame time is a balanced choice."
+   },
+   {
+    "q": "Does a 1 ms response time mean there is no ghosting?",
+    "a": "No. The 1 ms figure is usually the best single gray-to-gray transition measured in the most aggressive overdrive mode, which may introduce overshoot artifacts. Average transitions across all shades are often slower, and dark transitions on some panel types are slower still. Independent measurements across many transitions, plus trying each overdrive level yourself, are better indicators of real motion clarity."
+   },
+   {
+    "q": "Is response time the same thing as input lag?",
+    "a": "No. Input lag is the delay between the monitor receiving a signal and starting to display it, caused by image processing and scan-out. Response time is how long a pixel takes to physically change color once the change has started. A monitor can have fast pixels yet extra processing delay, which is why many monitors offer a game mode that disables some processing."
+   },
+   {
+    "q": "Can a console benefit from a 144 Hz monitor?",
+    "a": "Some current-generation console games offer 120 Hz modes, so a monitor that accepts 120 Hz over HDMI 2.1 can show smoother motion in those titles. Many console games still target 30 or 60 frames per second, however, and gain nothing from extra refresh headroom. Check the console's supported output modes and whether the monitor supports HDMI VRR before paying for a higher refresh rate."
+   }
+  ]
+ },
+ {
+  "slug": "ips-vs-va-vs-oled-gaming-monitor-panels",
+  "title": "IPS vs VA vs OLED Gaming Monitors: Panel Types Compared",
+  "meta_description": "Compare IPS, VA, OLED and Mini-LED gaming monitor panels: contrast, viewing angles, dark smearing, burn-in risk and which suits each kind of gamer.",
+  "intro": "Two gaming monitors with the same size, resolution and refresh rate can look strikingly different side by side, and the main reason is the panel technology underneath. IPS, VA and OLED each produce and control light in different ways, which leads to predictable strengths and weaknesses in contrast, motion handling, viewing angles and long-term durability. Understanding those trade-offs helps narrow a shortlist quickly, because the right panel depends far more on the games you play and the room you play in than on any single headline specification.",
+  "sections": [
+   {
+    "heading": "IPS: Accurate Color and Wide Viewing Angles",
+    "body": "In-plane switching (IPS) panels rotate their liquid crystals parallel to the screen, which keeps color and brightness consistent when the display is viewed from an angle. That makes IPS the traditional choice for players who also edit photos or video, and for anyone who sits off-center or shares the screen. Modern fast IPS panels also offer quick pixel transitions, so they handle high refresh rates well with relatively little smearing.\n\nThe main weakness is contrast. Typical IPS panels reach a static contrast ratio of around 1000:1, meaning black is only about a thousand times darker than full white. In a dark room, black backgrounds look dark gray and dim scenes lose depth. IPS panels also show IPS glow, a milky sheen visible in dark corners, especially when sitting close to a large screen or viewing from an angle. Glow varies between individual units and is distinct from backlight bleed, which comes from uneven pressure at the panel edges. For bright rooms, competitive titles and color-sensitive work, IPS remains a safe, well-rounded option, but dark atmospheric games will not look as rich as they do on the alternatives."
+   },
+   {
+    "heading": "VA: Deep Contrast With a Motion Trade-Off",
+    "body": "Vertical alignment (VA) panels align their liquid crystals perpendicular to the screen when no voltage is applied, which blocks the backlight much more effectively than IPS. The result is native contrast commonly around 3000:1 and sometimes higher, so blacks look noticeably deeper and night scenes, space games and films look more convincing, even without local dimming. VA is also common in curved and ultrawide monitors and is often found at attractive prices.\n\nThe trade-off is motion behavior in dark content. Transitions from black or very dark shades to slightly lighter ones are slower on many VA panels, which produces a dark trailing effect known as black smearing, most visible when moving the camera through shadowy areas. Aggressive overdrive can reduce it but may introduce overshoot in brighter transitions. VA panels also have narrower viewing angles than IPS, with contrast and color shifting as you move off-axis, which is one reason curved designs suit them well. Performance varies widely between models, and a well-tuned VA monitor can be quite fast. For players who prioritize image depth in story-driven or cinematic games, VA offers a lot of contrast for the money; for fast competitive shooters, check reviews for dark-transition performance."
+   },
+   {
+    "heading": "OLED: Per-Pixel Light and Its Caveats",
+    "body": "OLED panels have no backlight at all. Each subpixel produces its own light and switches fully off for black, which delivers effectively infinite contrast and true black next to bright highlights. Pixel response is also extremely fast, typically well under a millisecond, so motion stays clear at high refresh rates with virtually no smearing. Gaming OLED monitors usually use either WOLED, which adds a white subpixel to red, green and blue, or QD-OLED, which uses a blue emitter with quantum-dot color conversion.\n\nThere are real compromises. The organic materials wear with use, so static elements shown for long periods, such as taskbars, HUDs and minimaps, can leave permanent burn-in. Manufacturers counter this with pixel shifting, automatic panel refresh cycles and, in some cases, warranties that cover burn-in, so it is worth checking the terms. OLED monitors also use automatic brightness limiting, which lowers brightness when large areas of the screen are bright, making full-screen white documents dimmer than on a good LCD. Their non-standard subpixel layouts can cause slight color fringing on text. For mixed gaming and media use with varied content, OLED offers outstanding image quality, while all-day productivity with static windows favors LCD."
+   },
+   {
+    "heading": "Mini-LED, TN and How to Choose",
+    "body": "Mini-LED is not a separate panel type but an LCD backlight made of hundreds or thousands of small LEDs grouped into local dimming zones. Combined with an IPS or VA panel, it can dim the zones behind dark areas, greatly improving contrast and enabling bright HDR highlights without burn-in risk. The limitation is blooming: because each zone covers many pixels, bright objects on a dark background can show a halo. More zones and better dimming algorithms reduce this. Twisted nematic (TN) panels, once the standard for esports, still appear in some budget and ultra-high-refresh models, but their poor viewing angles and color make them hard to recommend for most buyers today.\n\nA practical way to choose is to start from use. Competitive players in bright rooms are well served by fast IPS. Players who mostly enjoy dark, cinematic games on a budget should consider VA. Those wanting the best motion clarity and contrast, who play varied content and can live with burn-in precautions, should look at OLED. Anyone wanting strong HDR highlights alongside heavy desktop use may prefer Mini-LED. In every case, check independent measurements of the specific model rather than relying on the panel label alone."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Which panel type is best for competitive FPS games?",
+    "a": "OLED offers the fastest pixel response and very clear motion, while fast IPS panels are a strong, burn-in-free alternative with wide viewing angles. Many VA panels are slower in dark transitions, which can smear shadows during quick camera movement, although some well-tuned models perform well. For competitive play, refresh rate, stable frame rates and low input lag matter as much as panel type."
+   },
+   {
+    "q": "How likely is burn-in on an OLED gaming monitor?",
+    "a": "Risk depends on usage. Varied content such as games and video wears pixels fairly evenly, while static elements displayed for many hours at high brightness, like taskbars or HUDs, raise the risk. Using a dark or auto-hiding taskbar, leaving the monitor's panel-care features enabled, and checking whether the warranty covers burn-in are sensible precautions for heavy daily use."
+   },
+   {
+    "q": "Is IPS glow a defect?",
+    "a": "IPS glow is a normal characteristic of the technology rather than a defect, though its intensity varies between units. It appears as a bright sheen in the corners of dark screens and changes when you move your head. Backlight bleed, in contrast, stays fixed regardless of viewing angle and comes from uneven panel assembly; severe bleed is usually a valid reason for a return."
+   },
+   {
+    "q": "Does a curved monitor work better with a particular panel type?",
+    "a": "Curves are most common on VA and ultrawide panels because bending the screen keeps the edges closer to a head-on viewing angle, which compensates for narrower viewing angles. Curved IPS and OLED models also exist. Whether a curve helps depends mostly on width: it is most useful on 34-inch and wider ultrawide screens and matters little on a standard 24-inch monitor."
+   }
+  ]
+ },
+ {
+  "slug": "gaming-headset-virtual-surround-explained",
+  "title": "Gaming Headset Virtual Surround Sound Explained",
+  "meta_description": "How virtual 7.1 surround works on a stereo gaming headset, the basics of HRTF, when spatial audio helps with footsteps, and how to avoid double processing.",
+  "intro": "Many gaming headsets advertise 7.1 surround sound, yet almost all of them contain just two speakers, one in each ear cup. The surround effect comes from software that reshapes the audio so the brain perceives sounds coming from around, behind and above. Configured well, it can make positional audio easier to read; configured poorly, it blurs footsteps and makes a game sound hollow. Understanding how it works explains why results vary so much between games and listeners.",
+  "sections": [
+   {
+    "heading": "How Two Speakers Create Directional Sound",
+    "body": "Humans locate sounds using a handful of cues. Interaural time difference is the tiny delay between a sound reaching one ear and then the other, well under a millisecond, and it is especially useful at lower frequencies. Interaural level difference is the volume difference created because the head shadows the far ear, which mostly affects higher frequencies. Together these cues tell the brain whether a sound is to the left or right, but on their own they cannot easily distinguish front from back or above from below.\n\nThe missing information comes from the shape of the outer ear, head and shoulders, which filter incoming sound differently depending on its direction. Engineers capture this filtering as a head-related transfer function (HRTF). Virtual surround software applies HRTF filters to each channel or sound source, adding the delays, level differences and subtle frequency changes that a real sound from that position would have. Played through ordinary stereo drivers, the processed signal can convince the brain that a sound is behind or beside the listener. Because every person's ears are shaped differently, a generic HRTF works very convincingly for some people and only partially for others, which is why opinions on virtual surround are so divided."
+   },
+   {
+    "heading": "Virtual 7.1 Versus Object-Based Spatial Audio",
+    "body": "Older virtual surround systems take a fixed set of channels, typically 5.1 or 7.1, and place each channel at a virtual speaker position around the listener. The game first mixes its sounds into those channels, then the headset software converts the virtual speakers into a binaural stereo signal. This works, but positional detail is limited by the spacing of the virtual speakers.\n\nNewer spatial audio formats are object-based. Instead of baking sounds into channels, the game passes individual sounds along with their position in three-dimensional space, including height. The renderer then applies HRTF processing to each object directly. Windows Sonic for Headphones, which is built into Windows, Dolby Atmos for Headphones and DTS Headphone:X are common examples on PC and Xbox, while the PlayStation 5 uses its own Tempest 3D Audio engine. Many competitive PC games also include a built-in HRTF or binaural mode that processes sound inside the game engine. Because the game knows precisely where every sound source is, an in-game spatial mode is often the most accurate option when it is available. Headset software surround, by contrast, can only work with the audio it receives and cannot recover positional detail the game never provided."
+   },
+   {
+    "heading": "Avoiding Double Processing and Other Setup Mistakes",
+    "body": "The most common cause of muddy, echoey audio is stacking several spatial effects at once. If a game's HRTF mode is enabled and the headset software's virtual 7.1 is also active, the sound is processed twice. The second pass applies direction and room filters to audio that has already been positioned, which smears the cues and can make footsteps seem to come from the wrong place. A good rule is to choose exactly one spatial processor: the game's own headphone mode, the operating system format, or the headset's virtual surround, never more than one.\n\nThe game's audio output setting should match the processor you pick. When using a game's built-in HRTF, set the game to headphones or stereo and switch off system and headset surround. When using Windows Sonic or a similar format, enable it in the system sound settings and set the game to its surround or spatial output. Also check that the headset is connected through the path its software expects, since some virtual surround features work only over USB or the included wireless dongle and do nothing over a 3.5 mm analog cable. Finally, disable bass boost or reverb while testing."
+   },
+   {
+    "heading": "When Virtual Surround Helps and When Stereo Is Better",
+    "body": "Virtual surround tends to help most in games where awareness of sounds behind or above you matters, such as tactical shooters with multi-level maps, battle royale games and immersive single-player titles. It also adds a sense of space to films and atmospheric games. For some listeners, however, a clean stereo signal from a well-designed game mix sounds sharper, because stereo avoids the tonal coloring that HRTF filters introduce. Since perception varies between individuals, comparing the options directly is more reliable than relying on general advice.\n\nA simple comparison method is to load a familiar map or practice mode, trigger the same sounds from known positions, such as footsteps or gunfire, and switch between stereo, the game's spatial mode and system or headset surround, one at a time. Listen for whether sounds behind are clearly distinguished from sounds in front, and whether distance is easy to judge. Hardware matters too: drivers with an even frequency response and ear cups that seal well preserve the subtle high-frequency cues that HRTF processing depends on. Equalizer adjustments that slightly emphasize the upper midrange can make footsteps clearer, but they should be applied sparingly to avoid harshness and fatigue."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Is virtual 7.1 surround the same as a real 7.1 headset?",
+    "a": "No. Virtual surround uses two drivers and software processing to simulate sound from many directions. A few headsets have used several small drivers per ear cup, but they are uncommon, and the drivers sit so close to the ear that they cannot recreate a speaker layout precisely. In practice, a good stereo headset with well-implemented spatial processing usually gives better positional cues."
+   },
+   {
+    "q": "Does virtual surround give a competitive advantage?",
+    "a": "It can help some players tell front from back and judge elevation, particularly with a well-implemented in-game spatial mode. For others, a generic HRTF that does not match their ears makes positioning less precise than plain stereo. The benefit is personal, so compare both settings with known sound sources in a practice mode rather than assuming surround is always better."
+   },
+   {
+    "q": "Why does virtual surround make my game sound echoey?",
+    "a": "Echoey or distant audio usually means either more than one spatial effect is active at once, or the processing adds simulated room reverb. Switch off every spatial option except one, set the game's output format to match it, and disable extra effects such as reverb or room modes in the headset software. If it still sounds hollow, compare it against plain stereo."
+   },
+   {
+    "q": "Do I need special software to get spatial audio on PC?",
+    "a": "Not necessarily. Windows Sonic for Headphones is built into Windows and can be enabled from the sound settings, and many games include their own headphone or binaural mode that needs no extra software. Other formats such as Dolby Atmos for Headphones or DTS Headphone:X require a separate app and may need a paid license unless one is bundled with the headset."
+   }
+  ]
+ },
+ {
+  "slug": "mouse-dpi-vs-in-game-sensitivity-explained",
+  "title": "Mouse DPI vs In-Game Sensitivity: How to Set Both",
+  "meta_description": "What gaming mouse DPI really means, how it combines with in-game sensitivity as eDPI and cm/360, and how to pick settings that keep your aim consistent.",
+  "intro": "Gaming mouse boxes often lead with very large DPI figures, sometimes in the tens of thousands, implying that a higher number means better aim. In reality, DPI is only one half of how fast the cursor or crosshair moves; the other half is the sensitivity setting in the operating system or game. Understanding how those values combine makes it possible to pick a comfortable speed, keep it consistent between games and mice, and avoid settings that quietly add acceleration.",
+  "sections": [
+   {
+    "heading": "What DPI Actually Means on a Mouse Sensor",
+    "body": "DPI stands for dots per inch, although the more accurate term is CPI, counts per inch. It describes how many movement counts the sensor reports to the computer for every inch the mouse travels across the surface. At 800 CPI, moving the mouse one inch sends 800 counts; at 1600 CPI, the same movement sends 1600. Software then turns those counts into cursor or camera movement, so doubling DPI with the same sensitivity makes everything move twice as far.\n\nCrucially, a higher DPI does not make a sensor more accurate in any meaningful way for gaming. It simply changes the ratio between hand movement and reported counts. Tracking quality depends on the sensor and its firmware: how faithfully it follows movement without jitter, whether it applies hidden acceleration or smoothing, and its maximum tracking speed, usually quoted in inches per second, before it loses track during fast flicks. Modern high-end sensors track cleanly across a broad range of DPI values, but some sensors introduce smoothing or noise at very high settings. Some mice also offer only certain native DPI steps and reach other values by interpolation in firmware, so commonly used values such as 400, 800, 1600 or 3200 are a safe default."
+   },
+   {
+    "heading": "eDPI and cm/360: Measuring Your Real Sensitivity",
+    "body": "Because DPI and in-game sensitivity multiply each other, neither number means much alone. The simplest combined figure is effective DPI, or eDPI, calculated as mouse DPI multiplied by in-game sensitivity. A player at 800 DPI with a sensitivity of 0.5 has an eDPI of 400, exactly the same as a player at 400 DPI with a sensitivity of 1.0. Both turn the same distance for the same hand movement in that game, which is why eDPI is used to compare settings between players.\n\neDPI only works within one game, though, because different games scale sensitivity differently. A more universal measure is centimeters per 360, written cm/360: the distance the mouse must travel to turn the in-game camera one full rotation. A low cm/360 such as 15 means a fast sensitivity suited to wrist aiming and quick turns, while a high value such as 50 means a slow sensitivity that relies on arm movement and allows fine control for precise tracking. Sensitivity converters use each game's internal scaling to translate a cm/360 value between titles, so the same physical motion produces the same turn everywhere. Keeping cm/360 constant is one of the most effective ways to make aiming muscle memory transfer between games."
+   },
+   {
+    "heading": "Operating System Settings That Interfere",
+    "body": "On Windows, the pointer speed slider and the Enhance pointer precision option both affect how mouse counts become desktop cursor movement. The slider's sixth notch out of eleven, the default middle position, applies a one-to-one multiplier, meaning each count moves the cursor one pixel. Positions above or below it scale movement up or down, and settings far from the middle can make the cursor skip pixels or move unevenly. A cleaner approach is to leave the slider in the middle and adjust speed with the mouse's DPI instead.\n\nEnhance pointer precision is a form of mouse acceleration: faster hand movements travel proportionally further than slow ones. That can feel convenient on the desktop, but it makes the distance moved depend on speed as well as distance, which works against consistent muscle memory. Most competitive games read raw input directly from the mouse, bypassing both the slider and acceleration, though some older titles or games without a raw input option are still affected. Mouse software can also apply its own acceleration, angle snapping, which straightens slightly diagonal movements, or lift-off distance adjustments. Turning off acceleration and angle snapping, and confirming whether a game uses raw input, removes hidden factors that make aim feel inconsistent from one session to the next."
+   },
+   {
+    "heading": "Choosing a DPI and Sensitivity That Suits You",
+    "body": "There is no single correct sensitivity, but a few principles help. Many competitive players in tactical shooters use relatively low sensitivities, which require larger arm movements but make small corrections easier, while fast-paced games with frequent quick turns often suit somewhat higher settings. Desk space, mousepad size and whether you aim mostly with the wrist or the whole arm all influence what feels comfortable. A setting that requires repeatedly lifting the mouse to complete an ordinary turn is usually too slow for your space.\n\nFor the DPI itself, a value of around 800 to 1600 is a practical starting point on most modern sensors, because it provides smooth desktop navigation at common resolutions while leaving room to fine-tune in-game sensitivity. Higher resolutions and multi-monitor setups can justify a higher DPI for desktop use. Once a baseline is chosen, adjust one variable at a time, ideally the in-game sensitivity, and give each change several sessions before judging it, since any new setting feels odd at first. Writing down your DPI, sensitivity and cm/360 makes it easy to restore your settings after a reinstall or when switching to a new mouse, whose actual DPI may differ slightly from the value shown in its software."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Is a higher DPI mouse better for gaming?",
+    "a": "Not automatically. DPI only sets how many counts the sensor reports per inch of movement; it does not make aim more accurate. Most players use values far below the maximum of a modern sensor. Tracking consistency, the absence of built-in acceleration, a comfortable shape and reliable switches matter far more than an extremely high maximum DPI figure on the box."
+   },
+   {
+    "q": "Should I change DPI or in-game sensitivity?",
+    "a": "Set DPI to a comfortable value for desktop use and leave the operating system pointer speed at its default one-to-one position. Then make fine adjustments with the in-game sensitivity, which usually offers smaller steps. This keeps the desktop and games consistent and avoids having to retune every game whenever the mouse DPI changes."
+   },
+   {
+    "q": "How do I keep the same sensitivity across different games?",
+    "a": "Measure or calculate your cm/360, the mouse distance needed for one full in-game rotation, in the game where your aim feels most comfortable. Then use a sensitivity converter, which accounts for each game's internal sensitivity scaling, to find the matching setting in other titles. Keep the same DPI throughout, so only the in-game value changes between games."
+   },
+   {
+    "q": "Does DPI affect input lag?",
+    "a": "At normal settings the effect is small. A higher DPI means the sensor reports movement in finer steps, so very small movements can register slightly sooner, but the difference is minor compared with polling rate, frame rate and display latency. Choose DPI for comfort and tracking quality rather than as a latency tweak, and avoid extreme values that may introduce sensor smoothing."
+   }
+  ]
+ }
+]

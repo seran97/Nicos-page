@@ -1,0 +1,170 @@
+[
+ {
+  "slug": "true-hepa-vs-hepa-type-filters-explained",
+  "title": "True HEPA vs HEPA-Type Filters: What the Labels Mean",
+  "meta_description": "Learn the difference between True HEPA, HEPA-type and H13 filters, what the 99.97% standard actually measures, and how to read air purifier filter labels.",
+  "intro": "Air purifier boxes are crowded with filter terms that sound almost identical: True HEPA, HEPA-type, HEPA-style, medical-grade, H13. Some of these describe a tested performance standard, while others are marketing language with no fixed definition. Because the filter is the part that actually removes particles from the air, knowing which label carries real meaning is one of the most practical ways to compare purifiers and avoid paying for a claim that has never been verified.",
+  "sections": [
+   {
+    "heading": "What the HEPA Standard Actually Requires",
+    "body": "HEPA stands for high-efficiency particulate air. In the United States, the definition most manufacturers reference comes from the Department of Energy, which specifies that a HEPA filter must capture at least 99.97% of particles 0.3 microns in diameter. The 0.3-micron size is not chosen because it is the smallest particle a filter can catch; it is chosen because it is close to the most penetrating particle size, the size that slips through fibrous filters most easily. Larger particles are stopped by impaction and interception, while much smaller particles move erratically through diffusion and tend to collide with fibers. That means a filter rated at 99.97% for 0.3 microns generally performs even better on particles both larger and smaller than that size.\n\nIn Europe, the EN 1822 standard (and the newer ISO 29463) uses classes instead. H13 requires at least 99.95% efficiency and H14 requires at least 99.995%, measured at the most penetrating particle size for that specific filter. When a product lists H13 or H14, it is referring to this classification system rather than the American 99.97% definition, though in practice both describe very high-efficiency media."
+   },
+   {
+    "heading": "HEPA-Type, HEPA-Style and Other Look-Alike Labels",
+    "body": "Terms such as HEPA-type, HEPA-like, HEPA-style or 99% HEPA are not regulated definitions. A filter carrying one of these labels may be reasonably efficient, but there is no requirement that it meets the 99.97% threshold, and the efficiency figure, if one is given at all, is often stated for a larger particle size such as 1 or 2 microns, where almost any decent filter scores well. Fine particles from smoke, cooking and vehicle exhaust are mostly smaller than 2.5 microns, so a filter that only performs well on large dust may do little for the particles most associated with health concerns.\n\nThe word True in front of HEPA is also marketing rather than a separate standard; it simply signals that the manufacturer claims the filter meets the real HEPA definition. The most useful step is to look for a specific stated efficiency and particle size, such as 99.97% at 0.3 microns, or an H13 classification. Vague wording like traps up to 99% of allergens without a particle size is a sign the claim cannot be compared with anything."
+   },
+   {
+    "heading": "Why the Filter Grade Is Only Half the Story",
+    "body": "A certified filter only helps if air actually passes through it. In poorly designed units, some air leaks around the filter frame or through gaps in the housing, a problem called bypass. Air that bypasses the filter is not cleaned at all, so a HEPA filter in a leaky housing can deliver worse real-world results than a slightly lower-grade filter in a well-sealed one. Some manufacturers test and advertise whole-unit or sealed-system efficiency, which is more meaningful than the filter media rating alone.\n\nThe other half is airflow. A purifier's ability to clean a room depends on how much air it moves through the filter, which is what the Clean Air Delivery Rate measured under the AHAM AC-1 test reflects. A dense HEPA filter paired with a weak fan may clean a room more slowly than an efficient filter paired with strong airflow. Comparing CADR figures, along with the filter grade, gives a far better picture than the filter label on its own. Noise matters too, because a purifier that is too loud on its higher speeds tends to be run on low, which reduces its effective cleaning rate."
+   },
+   {
+    "heading": "Carbon Layers, Pre-Filters and Replacement Timing",
+    "body": "HEPA media captures particles, not gases. Odors, cooking smells and volatile organic compounds pass straight through particulate filters, which is why many purifiers add an activated carbon layer. The amount of carbon matters: a thin carbon-dusted sheet saturates quickly, while a bed of loose granular carbon measured in pounds rather than grams can adsorb far more before it stops working. If odors or smoke smell are a priority, the weight or thickness of the carbon stage is worth checking.\n\nA washable or vacuumable pre-filter catches hair, lint and large dust before it reaches the HEPA layer, extending its life. The HEPA filter itself should generally not be washed; water and scrubbing can damage the fine fiber structure, and filters sold as washable HEPA are often not true HEPA media. Most manufacturers recommend replacing the main filter every 6 to 12 months, though homes with pets, smokers or wildfire smoke may need more frequent changes. Replacement cost and availability are worth checking before purchase, since the filter is a recurring expense for the life of the unit."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Is an H13 filter better than a True HEPA filter?",
+    "a": "They come from different rating systems. H13 is a European class requiring at least 99.95% efficiency at the most penetrating particle size, while the US HEPA definition requires 99.97% at 0.3 microns. In practice both are very high-efficiency filters, and the difference between them is far smaller than the difference made by housing seals, airflow and correct room sizing."
+   },
+   {
+    "q": "Do HEPA filters remove viruses and bacteria?",
+    "a": "HEPA filters can capture particles in the size range of many bacteria and the respiratory droplets and aerosols that carry viruses. The EPA notes that air cleaning can help reduce airborne contaminants, including viruses, as part of a broader approach that includes ventilation. A purifier is not a substitute for other precautions, and its benefit depends on adequate CADR for the room."
+   },
+   {
+    "q": "Can a HEPA-type filter still be worth buying?",
+    "a": "It can be adequate for capturing larger dust, pollen and pet hair, especially in a low-cost unit used for general freshening. However, because the efficiency claim is not standardized, it is hard to know how well it handles fine particles like smoke. For allergies, asthma or wildfire smoke, a filter with a stated 99.97% at 0.3 microns rating is the safer choice."
+   },
+   {
+    "q": "How do I know when a HEPA filter needs replacing?",
+    "a": "Many purifiers include a filter indicator, but most are timers rather than sensors, so they estimate based on running hours. Signs a filter is loaded include visibly gray or dark media, reduced airflow at the same fan speed, and returning odors if there is a carbon stage. Following the manufacturer's interval and adjusting for pets or smoke is the most reliable approach."
+   }
+  ]
+ },
+ {
+  "slug": "robot-vacuum-suction-pa-ratings-explained",
+  "title": "Robot Vacuum Suction Power (Pa) Ratings Explained",
+  "meta_description": "What do Pa suction ratings on robot vacuums really mean? Learn how pascals relate to cleaning, why higher numbers can mislead, and what matters for carpets.",
+  "intro": "Robot vacuum listings increasingly compete on a single number: suction power in pascals, abbreviated Pa. Figures have climbed from around 2,000 Pa a few years ago to well over 10,000 Pa on some current models, and it is tempting to treat the biggest number as the best cleaner. In reality, the Pa figure measures one narrow aspect of a vacuum's design, and it is not tested in a consistent way across brands. Understanding what it does and does not capture helps separate useful specifications from marketing escalation.",
+  "sections": [
+   {
+    "heading": "What a Pascal Rating Actually Measures",
+    "body": "A pascal is a unit of pressure. When a robot vacuum lists 5,000 Pa, it is describing the pressure difference its motor can create between the outside air and the inside of the suction channel, usually at or near a sealed inlet with no air flowing. This is sometimes called static pressure or sealed suction. It indicates how strongly the vacuum can pull, but not how much air it moves while actually cleaning.\n\nCleaning depends on both pressure and airflow. Airflow, the volume of air passing through the nozzle, is what carries dust and debris off the floor and into the bin. A motor can produce high sealed pressure while moving relatively little air, or moderate pressure with generous airflow. Because the Pa number is measured under conditions that never occur during normal cleaning, it is best understood as a rough indicator of motor strength rather than a direct prediction of pickup. There is also no single mandatory test method that every manufacturer must use for advertised Pa, so a figure from one brand cannot always be compared directly with a figure from another. International standards such as IEC 62929 describe how to measure cleaning robot performance, but advertised suction numbers are rarely tied to them."
+   },
+   {
+    "heading": "Why Brushes, Seals and Bin Design Matter as Much as Suction",
+    "body": "On hard floors, most debris sits on the surface, and nearly any current robot vacuum has enough suction to pick it up. The deciding factors there tend to be how well the side brush sweeps edges and corners, and how closely the cleaning head stays in contact with the floor. On carpet, dirt and hair settle between fibers, and agitation from the main brush roll does much of the work of loosening it before suction can lift it.\n\nThe main brush design affects performance in ways the Pa figure cannot show. Rubber or combined rubber-and-bristle rollers tend to resist hair wrap better than pure bristle brushes, and some designs use combs or tapered shapes to push hair off the roller. A gap between the brush and the floor, a poorly sealed brush chamber or a clogged filter all reduce effective suction at the floor. Filter condition matters too: a dirty filter restricts airflow, so a high-suction robot with a neglected filter can clean worse than a lower-rated model that is maintained. Independent testing that measures actual debris pickup on carpet and hard floors is more informative than any single suction specification."
+   },
+   {
+    "heading": "The Trade-Offs That Come With Higher Suction",
+    "body": "Higher suction modes draw more power, and the most common trade-off is shorter runtime. A robot that runs for well over two hours on its standard setting may manage only a fraction of that on its maximum mode, which matters in larger homes where the robot must return to the dock to recharge before finishing. Many robots handle this by automatically raising suction only when they detect carpet, keeping lower power on hard floors.\n\nNoise rises with suction as well. The highest power settings are noticeably louder, which may be acceptable when no one is home but less so during evening or overnight runs. Very strong suction can also cause the robot to grip lightweight rugs or pull up fringes and loose cords, which is one reason many models reduce power or avoid rug edges.\n\nFor most homes, the question is not whether a robot has the highest number available but whether it has enough suction for the home's flooring, combined with a good brush design and sufficient runtime to finish the job on one charge. A home with mostly hard floors gains little from top-tier suction, while one with thick or high-pile carpet benefits more."
+   },
+   {
+    "heading": "How to Use Suction Specs When Comparing Models",
+    "body": "Treat the Pa rating as a comparison point within a single brand's lineup rather than across brands. If one manufacturer's model is rated at 8,000 Pa and its sibling at 4,000 Pa, the higher-rated motor is very likely stronger, because the same company presumably uses the same measurement method. Comparing a figure from one brand with a figure from another is much less reliable.\n\nBeyond the number, check whether the robot offers automatic carpet boost, how many suction levels it has, and whether settings can be adjusted per room in the app. Look at the dustbin and self-emptying dock design, since a bin that fills quickly or a dock that clogs reduces real cleaning performance. For pet owners, the main brush design and hair-tangle resistance are usually more important than an extra few thousand pascals.\n\nFinally, consider maintenance. Keeping the filter clean, removing hair from the brush roll and side brush, and clearing the suction inlet keep a robot performing close to its rated capability. A robot vacuum is a system, and suction power is just one part of how well that system cleans."
+   }
+  ],
+  "faq": [
+   {
+    "q": "How many Pa of suction does a robot vacuum need?",
+    "a": "There is no official threshold, and figures are not measured consistently across brands. As a general guide, homes with mostly hard floors and low-pile rugs are well served by mid-range robots, while homes with thick carpet or heavy pet shedding benefit from stronger suction combined with an effective brush roll. Brush design and runtime matter alongside the Pa number."
+   },
+   {
+    "q": "Is Pa the same as air watts?",
+    "a": "No. Pascals measure pressure, while air watts combine pressure and airflow into a measure of the power delivered at the nozzle. Air watts are more common on cordless stick and upright vacuums, while robot vacuums are usually marketed with Pa. The two cannot be converted into each other without knowing the airflow, so they should not be compared directly."
+   },
+   {
+    "q": "Does higher suction help with pet hair?",
+    "a": "It helps somewhat, especially on carpet, but pet hair performance depends heavily on the main brush. Hair tends to wrap around bristle rollers, which reduces pickup over time regardless of suction. Rubber or anti-tangle brush designs, a large bin and a self-emptying dock often make a bigger difference for pet owners than the highest available suction rating."
+   },
+   {
+    "q": "Why does my robot vacuum seem weaker over time?",
+    "a": "The most common causes are a dirty or clogged filter, hair wrapped around the brush roll, a full bin or a blocked inlet, all of which reduce airflow at the floor. Battery aging can also shorten runtime. Cleaning the filter and brushes regularly and replacing filters, brushes and side brushes at the manufacturer's recommended intervals usually restores performance."
+   }
+  ]
+ },
+ {
+  "slug": "ideal-indoor-humidity-level-to-prevent-mold",
+  "title": "Ideal Indoor Humidity Level to Prevent Mold at Home",
+  "meta_description": "What indoor humidity prevents mold? Learn the EPA-recommended range, how to measure humidity, where moisture builds up, and how to keep each room in check.",
+  "intro": "Mold needs three things to grow indoors: spores, which are almost always present in the air, a food source such as drywall, wood or dust, and moisture. Of the three, moisture is the only one homeowners can realistically control. Keeping indoor humidity in the right range, and dealing quickly with leaks and condensation, prevents most household mold problems before they start. This guide explains the recommended humidity range, how to measure it, and the practical steps that keep it there throughout the year.",
+  "sections": [
+   {
+    "heading": "The Recommended Humidity Range and Why It Works",
+    "body": "The US Environmental Protection Agency recommends keeping indoor relative humidity below 60%, and ideally between 30% and 50%. Relative humidity is the amount of water vapor in the air compared with the maximum the air could hold at that temperature, expressed as a percentage. Above roughly 60%, surfaces in cooler parts of a home can stay damp enough for mold and mildew to grow, and dust mites, a common allergy trigger, thrive in humid conditions as well.\n\nThe important detail is that humidity is not uniform throughout a house. Cold surfaces, such as exterior walls, window frames, basement floors and the backs of closets on outside walls, are cooler than the room air. Air in contact with those surfaces cools, its relative humidity rises, and moisture can condense even when the room itself reads a comfortable 55%. This is why mold often appears behind furniture pushed against outside walls or in closet corners. Keeping overall humidity toward the lower end of the range provides a margin of safety for these cool spots.\n\nGoing too low has drawbacks too. Below about 30%, many people experience dry skin, irritated sinuses and static electricity, and wood floors and furniture can shrink or crack."
+   },
+   {
+    "heading": "How to Measure Indoor Humidity Accurately",
+    "body": "An inexpensive digital hygrometer is the simplest tool for knowing where a home stands. Many smart thermostats, weather stations and air purifiers also report humidity. Because consumer sensors can drift by several percentage points, it is worth comparing two devices or checking one against a known reference. A common at-home check is the salt test: a sensor sealed in a bag or container with damp table salt should read close to 75% after several hours.\n\nPlacement affects readings. A hygrometer next to a shower, kitchen stove or humidifier will read high, while one near a heating vent will read low. Placing sensors in the main living area, the bedroom and any area known to be damp, such as a basement or laundry room, gives a more complete picture. Readings are most useful when tracked over days and seasons rather than taken once.\n\nVisible signs supplement the numbers. Regular condensation on the inside of windows, a musty smell, peeling paint, warped wood or dark spotting on grout and ceilings all suggest humidity or moisture problems that deserve attention, even if a single reading looks acceptable."
+   },
+   {
+    "heading": "Room-by-Room Sources of Excess Moisture",
+    "body": "Bathrooms produce large bursts of humidity from showers and baths. A properly sized exhaust fan that vents outdoors, not into the attic, should run during bathing and for a period afterward to clear moisture. Squeegeeing shower walls and leaving the door open after use also help.\n\nKitchens add moisture from cooking, especially boiling water. A range hood vented to the outside is far more effective than a recirculating hood, which filters grease but returns the humid air to the room. Covering pots reduces how much steam escapes in the first place.\n\nBasements and crawlspaces are often the dampest areas because they are cool and in contact with the ground. Moisture can enter through foundation walls and floors, and warm summer air condenses on cool basement surfaces. Grading soil away from the foundation, keeping gutters and downspouts clear and directed away from the house, and running a dehumidifier are standard measures.\n\nLaundry areas need dryers vented outdoors, and drying clothes on indoor racks adds noticeable moisture. Houseplants, aquariums and unvented gas heaters also add water vapor. In winter, an overused humidifier is a frequent and overlooked cause of window condensation and mold."
+   },
+   {
+    "heading": "Practical Steps to Keep Humidity Under Control",
+    "body": "Air conditioning removes moisture as it cools, but an oversized system that cycles on and off quickly may cool a home without running long enough to dehumidify well. In humid climates, a dedicated dehumidifier often fills that gap, particularly in basements. Dehumidifier capacity is rated in pints of water removed per day. Since 2019, DOE testing for portable units has been performed at 65 degrees Fahrenheit and 60% relative humidity, which produces lower pint ratings than the older, warmer test conditions, so a current rating may look smaller than an older model's without being less capable. Standard compressor dehumidifiers also lose effectiveness in cold spaces, so very cool basements or garages may need a model designed for low temperatures.\n\nVentilation helps when outdoor air is drier than indoor air, as it often is in winter. Improving air circulation, such as leaving a gap between furniture and exterior walls and keeping closet doors ajar, reduces cool, stagnant pockets.\n\nAbove all, fix water problems quickly. The EPA advises drying water-damaged areas and materials within 24 to 48 hours to prevent mold growth. Leaks, plumbing drips and roof problems will sustain mold no matter how well overall humidity is managed."
+   }
+  ],
+  "faq": [
+   {
+    "q": "What humidity level is too high indoors?",
+    "a": "The EPA recommends keeping indoor relative humidity below 60%, with 30% to 50% as the ideal range. Sustained readings above 60% raise the risk of mold, mildew and dust mites, especially on cool surfaces like exterior walls, windows and basement floors. Short spikes after a shower are normal as long as humidity drops back down within a reasonable time."
+   },
+   {
+    "q": "Will a dehumidifier get rid of existing mold?",
+    "a": "No. A dehumidifier lowers humidity so new mold is less likely to grow, but it does not remove mold that is already established. The EPA notes that small areas, generally under about 10 square feet, can often be cleaned by a homeowner, while larger areas or mold related to contaminated water or HVAC systems may require professional help. The moisture source must also be fixed."
+   },
+   {
+    "q": "Why do my windows have condensation in winter?",
+    "a": "Window glass is usually the coldest surface in a heated room. When indoor air touches it, the air cools and can no longer hold as much moisture, so water condenses on the glass. Lowering indoor humidity, running bathroom and kitchen exhaust fans, using a humidifier less, and improving air movement near windows all help. Persistent condensation can damage frames and sills."
+   },
+   {
+    "q": "Is 55% humidity bad for a home?",
+    "a": "At 55%, a home is still below the EPA's 60% upper limit, but it is above the ideal range of 30% to 50%. In many homes it causes no problems, yet cool spots such as basements, closets on exterior walls and areas behind furniture may reach higher humidity locally. If musty smells or condensation appear, aiming a little lower is a sensible precaution."
+   }
+  ]
+ },
+ {
+  "slug": "do-bug-zappers-kill-mosquitoes",
+  "title": "Do Bug Zappers Kill Mosquitoes? What They Really Attract",
+  "meta_description": "Bug zappers attract many insects, but mosquitoes are not their main catch. Learn how UV zappers work, what they kill, and what actually reduces mosquitoes.",
+  "intro": "Electric bug zappers are a familiar sight on porches and patios, and the steady crackle of insects hitting the grid gives a strong impression that they are working. Whether they actually reduce mosquito bites is a different question. The answer depends on how the insects you want to control find their targets, and mosquitoes behave quite differently from the moths and beetles that circle a porch light. Understanding that difference helps in choosing the right tool and placing it where it can do some good.",
+  "sections": [
+   {
+    "heading": "How Bug Zappers Work",
+    "body": "A typical bug zapper uses an ultraviolet lamp, usually emitting UV-A light, surrounded by an electrified metal grid. Many night-flying insects are phototactic, meaning they are drawn toward light, and they are particularly sensitive to ultraviolet wavelengths. When an insect flies toward the lamp and bridges the gap between the grid wires, the high-voltage, low-current charge kills it.\n\nOutdoor zappers are designed with higher voltage grids and weather-resistant housings, while indoor units and plug-in models are smaller and often use lower-power lamps. Rechargeable lantern-style zappers are portable but generally have a smaller lamp and grid, which limits the area they can draw insects from. Some models also include a fan that pulls insects into a collection tray instead of using an electrical grid, and some combine a lamp with a scented or chemical lure.\n\nThe design works well for insects that are strongly attracted to light. Moths, many beetles, midges and some flies respond readily to UV lamps, which is why a zapper hung on a summer evening can collect a large number of insects in a short time. The key question is which insects make up that catch."
+   },
+   {
+    "heading": "Why Mosquitoes Are Not the Main Catch",
+    "body": "Female mosquitoes, the ones that bite, locate people and animals primarily through chemical and thermal cues rather than ultraviolet light. They detect carbon dioxide in exhaled breath from a distance, then home in using body heat, moisture and skin odors such as lactic acid and other compounds. Light plays a much smaller role in how they find a meal.\n\nAs a result, entomological research on UV bug zappers has repeatedly found that mosquitoes and other biting flies make up only a small fraction of the insects killed. A frequently cited study from the University of Delaware, which examined the contents of residential zappers, found that biting insects accounted for well under one percent of the catch, while the large majority were non-biting insects, many of them harmless or beneficial. University extension services and the American Mosquito Control Association have generally described UV zappers as ineffective for controlling mosquitoes.\n\nThis also creates an ecological cost. Many of the insects killed are moths, beetles and aquatic insects that serve as food for birds, bats and fish, and some, such as certain predatory and parasitic insects, help control garden pests. A zapper that runs all night can remove large numbers of them without meaningfully reducing bites."
+   },
+   {
+    "heading": "Where Bug Zappers Can Still Make Sense",
+    "body": "Zappers are better suited to light-attracted nuisance insects than to biting ones. Around a porch or outdoor kitchen, they can reduce the number of moths and other flying insects gathering near lights. Indoors, units designed for flies, gnats or fruit flies can be useful in kitchens, garages and barns, especially models that pair a UV lamp with a sticky board, which avoids scattering insect fragments.\n\nPlacement determines whether a zapper helps or makes things worse. Because the lamp attracts insects, placing one directly over a seating area can draw more insects toward people. The usual guidance is to place the zapper away from where people gather, so it pulls insects away from them rather than toward them, and to keep it away from food preparation areas.\n\nSafety and maintenance matter too. Outdoor units should be rated for outdoor use, mounted out of reach of children and pets, and unplugged before cleaning. Dead insects build up on the grid and in the tray and should be cleared regularly, using a brush rather than hands. UV lamps gradually lose output even while they still glow, so manufacturers typically recommend replacing them on a regular schedule, often once per season."
+   },
+   {
+    "heading": "Methods That Actually Reduce Mosquito Bites",
+    "body": "Eliminating breeding sites is the most effective long-term measure. Mosquitoes lay eggs in standing water, and some common species breed in containers as small as a bottle cap. Emptying or scrubbing birdbaths, plant saucers, buckets, kiddie pools, clogged gutters and tarps at least once a week interrupts their life cycle. Water that cannot be drained, such as ornamental ponds or rain barrels, can be screened or treated with larvicides based on Bti, a bacterium that targets mosquito larvae.\n\nFor personal protection, the EPA and CDC point to EPA-registered repellents containing active ingredients such as DEET, picaridin, IR3535, oil of lemon eucalyptus or 2-undecanone, used according to label directions. Long sleeves and pants add a physical barrier during peak activity periods.\n\nOn patios, a simple electric fan can help noticeably. Mosquitoes are weak fliers, and a steady breeze makes it harder for them to land, while also dispersing the carbon dioxide and body odors they use to find people. Traps that release carbon dioxide or mimic human scent target mosquitoes more selectively than UV zappers, though their results vary with placement and local conditions. Window and door screens in good repair keep mosquitoes out of the house."
+   }
+  ],
+  "faq": [
+   {
+    "q": "Do bug zappers attract more mosquitoes to my yard?",
+    "a": "UV zappers do not strongly attract mosquitoes, so they are unlikely to draw large numbers into a yard. The bigger risk is placement: a zapper near people attracts other insects toward the seating area, and the mosquitoes already present will still find people by their breath and body heat. Placing zappers away from gathering spots avoids drawing insects closer."
+   },
+   {
+    "q": "Are indoor plug-in mosquito killers effective?",
+    "a": "Indoor UV units tend to catch small flies, gnats and moths more readily than mosquitoes, for the same reason outdoor zappers do. They can help in a closed room where a few mosquitoes have entered, especially in darkness when the lamp is the main light source, but screens, closed doors and removing standing water nearby are more reliable ways to keep mosquitoes out."
+   },
+   {
+    "q": "Are bug zappers safe for kids and pets?",
+    "a": "Consumer zappers are designed with protective outer cages so fingers cannot easily reach the electrified grid, and the current is low, but they still carry high voltage. Mount outdoor units out of reach, choose models with safety certification marks from a recognized testing laboratory, keep them away from water unless rated for it, and always unplug or switch off before cleaning."
+   },
+   {
+    "q": "What attracts mosquitoes most?",
+    "a": "Mosquitoes are drawn mainly to carbon dioxide from breathing, body heat and skin odors, including lactic acid and other compounds produced on skin. Movement, dark clothing and sweat can make a person easier to find. Individual differences in skin chemistry help explain why some people are bitten more than others, which is why repellents and air movement work better than lights."
+   }
+  ]
+ }
+]

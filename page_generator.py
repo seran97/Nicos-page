@@ -443,6 +443,8 @@ def actualizar_index_html():
     """
     pages = sorted(DOCS_DIR.glob("*/index.html"))
     pages = [p for p in pages if p.parent != DOCS_DIR]
+    # la portada no enlaza duplicados / baja calidad (noindex_paginas.json)
+    pages = [p for p in pages if 'content="noindex' not in p.read_text(encoding="utf-8", errors="replace")[:2000]]
 
     index_path = DOCS_DIR / "index.html"
     if not index_path.exists():
