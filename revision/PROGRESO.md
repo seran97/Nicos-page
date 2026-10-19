@@ -16,7 +16,8 @@ Telegram, Search Console ~10/día) en `DRIVE PERSONAL/Escritorio/Sergio- Persona
       contact.html y affiliate-disclosure.html; frase de Amazon Associates; portada sin noindex.
 
 ## Pendiente (en este orden)
-- [ ] **Parte 3 · Páginas delgadas** — 20 páginas indexables con < 450 palabras
+- [x] **Parte 3 · Páginas delgadas** (2026-10-19, commits 2038d13 + siguiente): 5 → noindex, 15 enriquecidas con sección de criterios y 12 enlaces a guías.
+      Detalle original: — 20 páginas indexables con < 450 palabras
       (`revision/paginas_cortas.json`). Por cada una decidir: comparativas sin sentido
       (p. ej. "gaming-headset-vs-gaming-mouse") → `noindex`; reseñas válidas → enriquecer con una
       sección útil en voz neutra (sin primera persona, sin inventar datos). Lotes de 10 páginas;
@@ -27,6 +28,10 @@ Telegram, Search Console ~10/día) en `DRIVE PERSONAL/Escritorio/Sergio- Persona
 - [ ] **Parte 5 · Medir indexación ~2026-10-25** — `python revision/medir_indexacion.py`
       (solo lectura, no gasta la cuota de "Solicitar indexación"). Comparar con
       `indexacion_2026-10-18.json`: 44/400 indexadas, 19 de 32 pedidas, hubs "Rastreada sin indexar".
+
+- [ ] **Hallazgo aparte · productos que no corresponden al título** — p. ej. best-breville-smart-oven-air-fryer(-pro)
+      muestran un Breville Smart Oven Pro BOV845 reacondicionado, que no tiene función air fry. Revisar a mano
+      contra la ficha de Amazon antes de decidir (cambiar producto o noindex).
 
 ## Herramientas
 - `revision/auditar_paginas.py` — auditoría de requisitos (title, description, canonical, h1,
