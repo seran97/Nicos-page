@@ -265,5 +265,10 @@
  "best-weird-spot-out-ebay": "el título no coincide con el producto",
  "best-women-s-linen-shorts-aliexpress": "duplica la versión de Amazon",
  "best-women-s-linen-shorts-ebay": "duplica la versión de Amazon",
- "best-won-start-after": "el título no coincide con el producto"
+ "best-won-start-after": "el título no coincide con el producto",
+ "best-gaming-headset-vs-best-gaming-mouse": "comparativa de productos distintos (parte 3)",
+ "best-sous-vide-vs-best-sous-vide-cooker": "compara un producto consigo mismo (parte 3)",
+ "best-running-shoes-vs-best-adidas-running-shoes": "genérico vs su propia marca (parte 3)",
+ "best-air-fryer-vs-best-cuisinart-air-fryer": "genérico vs su propia marca (parte 3)",
+ "best-blackvue": "producto genérico 'accesorio' sin especificar (parte 3)"
 }
