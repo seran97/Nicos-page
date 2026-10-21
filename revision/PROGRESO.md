@@ -22,7 +22,8 @@ Telegram, Search Console ~10/día) en `DRIVE PERSONAL/Escritorio/Sergio- Persona
       (p. ej. "gaming-headset-vs-gaming-mouse") → `noindex`; reseñas válidas → enriquecer con una
       sección útil en voz neutra (sin primera persona, sin inventar datos). Lotes de 10 páginas;
       guardar en `revision/parte3_hecho.json` cada slug terminado.
-- [ ] **Parte 4 · Títulos y descripciones** — ~250 títulos > 70 caracteres y ~60 descripciones
+- [x] **Parte 4 · Títulos y descripciones** (2026-10-21): 281 títulos y 84 descripciones acortados (`revision/parte4_titulos.json`); quedan largos solo guías ya indexadas (no se tocan) y 4 comparativas. Sitemap regenerado: 430.
+      Detalle original: — ~250 títulos > 70 caracteres y ~60 descripciones
       fuera de 70–165. Solo con script (barato): quitar " — Expert Pick + Buying Guide" y similares;
       no tocar las 63 guías. Correr `python revision/auditar_paginas.py` antes y después.
 - [ ] **Parte 5 · Medir indexación ~2026-10-25** — `python revision/medir_indexacion.py`
