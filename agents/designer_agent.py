@@ -304,9 +304,6 @@ Return ONLY complete HTML starting with <!DOCTYPE html>. No markdown, no explana
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"Product","name":"{titulo_safe}","image":"{amazon.get('imagen_url', '')}","aggregateRating":{{"@type":"AggregateRating","ratingValue":"{amazon['rating']}","reviewCount":"{amazon['reviews']}","bestRating":"5"}},"offers":{{"@type":"Offer","price":"{amazon['precio']:.2f}","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"{amazon['affiliate_url']}"}}}}
-</script>
-<script type="application/ld+json">
 {{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{{"@type":"Question","name":"What is the best {keyword}?","acceptedAnswer":{{"@type":"Answer","text":"Based on {amazon['reviews']:,} verified buyer reviews and community research, the {titulo_safe} ({amazon['rating']}★, ${amazon['precio']:.2f}) is our top pick for {anio}."}}}}]}}
 </script>
 <style>

@@ -136,7 +136,6 @@ def generar_pagina(keyword: str, amazon: dict, trends: dict,
   <meta property="og:image" content="{amazon['imagen_url']}">
 
   <!-- Schema.org -->
-  <script type="application/ld+json">{json.dumps(schema_product)}</script>
   <script type="application/ld+json">{json.dumps(schema_faq)}</script>
   <script type="application/ld+json">{json.dumps(schema_breadcrumb)}</script>
 
