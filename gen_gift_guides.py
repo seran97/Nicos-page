@@ -80,7 +80,7 @@ GUIDES = [
         "items": [
             ("best-family-board-games-for-vacation", "Four compact classics for the whole family on Christmas Eve or a road trip."),
             ("best-leather-wallet-men", "A slim leather wallet with RFID blocking, a classic gift for him."),
-            ("best-minimalist-stud-earrings", "Dainty sterling-silver evil-eye studs, a small and safe gift for her."),
+            ("best-minimalist-stud-earrings", "Dainty sterling-silver studs with cubic zirconia, a small and safe gift for her."),
             ("best-skin-care-routine", "A complete vitamin C set, an easy way to start a skincare routine."),
             ("best-insulated-water-bottle-for-hiking", "Keeps drinks cold all day, useful for the gym, the office or hiking."),
             ("best-car-phone-mount-magsafe", "A magnetic mount that charges an iPhone while it navigates."),
@@ -89,6 +89,10 @@ GUIDES = [
         ],
     },
 ]
+
+
+# Some manifest categories are wrong (the board games page was filed under Pet Supplies)
+CAT_FIX = {"best-family-board-games-for-vacation": "Toys & Games"}
 
 
 def productos(items, manifest):
@@ -100,7 +104,8 @@ def productos(items, manifest):
         if not m or m.get("source") != "amazon" or not (DOCS_DIR / slug / "index.html").exists():
             print(f"  SKIP {slug} — not in manifest, not Amazon, or page missing")
             continue
-        out.append({**m, "motivo": motivo, **({"titulo": nombre[0]} if nombre else {})})
+        out.append({**m, "motivo": motivo, **({"titulo": nombre[0]} if nombre else {}),
+                    "amazon_cat": CAT_FIX.get(slug, m["amazon_cat"])})
     return out
 
 
