@@ -88,7 +88,31 @@ GUIDES = [
             ("best-outdoor-string-lights-edison-bulb", "Warm string lights for the patio or balcony, for the holidays and beyond."),
         ],
     },
+    {
+        "slug": "christmas-gifts-for-runners",
+        "emoji": "👟",
+        "title": "Christmas Gifts for Runners",
+        "h1": "Christmas Gifts for Runners: Nike, Adidas, New Balance and More",
+        "desc": "Christmas gift ideas for runners: Nike Pegasus, Vomero and Free Run, Adidas Hyperboost, New Balance FuelCell and Under Armour running shoes, with honest notes on who each one suits.",
+        "intro": "Running shoes are the gift runners actually use every week, but only if the size and the type of running fit. A cushioned road shoe, a trail shoe and a lightweight trainer feel very different. Each pick below says who it suits and links to our full review; prices and sizes change fast in December, so check the store before buying.",
+        "tips": [
+            "Ask (or check their current pair) for the exact size and width; running shoe sizes vary between brands.",
+            "Road shoes are for pavement and treadmills; trail shoes have more grip and protection for dirt and rocks.",
+            "Buy from a store with free returns or keep the gift receipt, so they can swap the size after Christmas.",
+        ],
+        "items": [
+            ("best-nike-pegasus-42", "Nike's best-known daily trainer: cushioned and durable for easy runs and long weekend miles.", "Nike Women's Pegasus 41 Running Shoes"),
+            ("best-nike-vomero-plus", "Nike's softest road shoe, for runners who want maximum cushioning on long, easy runs.", "Nike Women's Vomero Plus Running Shoes"),
+            ("best-nike-trail-running-shoes", "A waterproof trail shoe for winter runs on wet dirt and mud.", "Nike Men's Pegasus Trail 5 GORE-TEX"),
+            ("best-nike-men-s-free-run-5-0-running-shoes", "Light and flexible, a good fit for short runs, the gym and everyday wear.", "Nike Men's Free Run 5.0"),
+            ("best-hyperboost-edge-running-shoes-ebay", "Adidas' cushioned road shoe, bought on eBay, where sizes and colors that sold out elsewhere sometimes appear.", "Adidas Women's Hyperboost Edge Running Shoes"),
+            ("best-new-balance-running-shoes", "A light, bouncy shoe for faster runs and tempo days.", "New Balance Men's FuelCell Rebel v5"),
+            ("best-under-armour-running-shoes", "An affordable, cushioned shoe for new runners and gym sessions.", "Under Armour Men's Charged Assert 11"),
+        ],
+    },
 ]
+
+TIENDA = {"amazon": "Amazon", "ebay": "eBay"}
 
 
 # Some manifest categories are wrong (the board games page was filed under Pet Supplies)
@@ -96,13 +120,13 @@ CAT_FIX = {"best-family-board-games-for-vacation": "Toys & Games"}
 
 
 def productos(items, manifest):
-    """Merges each slug with its manifest data; skips missing or non-Amazon pages."""
+    """Merges each slug with its manifest data; skips missing pages and stores other than Amazon/eBay."""
     datos = {m["slug"]: m for m in manifest}
     out = []
     for slug, motivo, *nombre in items:
         m = datos.get(slug)
-        if not m or m.get("source") != "amazon" or not (DOCS_DIR / slug / "index.html").exists():
-            print(f"  SKIP {slug} — not in manifest, not Amazon, or page missing")
+        if not m or m.get("source") not in TIENDA or not (DOCS_DIR / slug / "index.html").exists():
+            print(f"  SKIP {slug} — not in manifest, store not supported, or page missing")
             continue
         out.append({**m, "motivo": motivo, **({"titulo": nombre[0]} if nombre else {}),
                     "amazon_cat": CAT_FIX.get(slug, m["amazon_cat"])})
@@ -121,10 +145,17 @@ def estilos():
 def gen_guide_html(g, products, css):
     anio = datetime.now().year
     mes = datetime.now().strftime("%B %Y")
-    total_reviews = sum(p["reviews"] for p in products)
+    # eBay manifest entries carry placeholder ratings (4.2 / 50), so only Amazon ratings are shown
+    amazon = [p for p in products if p["source"] == "amazon"]
+    total_reviews = sum(p["reviews"] for p in amazon)
+    tiendas = " and ".join(sorted({TIENDA[p["source"]] for p in products}))
     cards = ""
     for p in products:
         titulo = p["titulo"][:70] + ("..." if len(p["titulo"]) > 70 else "")
+        meta = (f"""<span class="card-stars">{hub.stars(p['rating'])}</span>
+          <span class="card-rating">{p['rating']}★</span>
+          <span class="card-reviews">({p['reviews']:,} ratings)</span>""" if p["source"] == "amazon"
+                else '<span class="card-reviews">Sold on eBay</span>')
         cards += f"""
     <div class="prod-card">
       <a href="{SITE_URL}/{p['slug']}/" class="card-img-link">
@@ -134,14 +165,12 @@ def gen_guide_html(g, products, css):
         <div class="card-cat">{p['amazon_cat']}</div>
         <a href="{SITE_URL}/{p['slug']}/" class="card-title">{titulo}</a>
         <div class="card-meta">
-          <span class="card-stars">{hub.stars(p['rating'])}</span>
-          <span class="card-rating">{p['rating']}★</span>
-          <span class="card-reviews">({p['reviews']:,} ratings)</span>
+          {meta}
         </div>
         <p class="card-why">{p['motivo']}</p>
         <div class="card-actions">
           <a href="{SITE_URL}/{p['slug']}/" class="btn-review">Read Review →</a>
-          <a href="{p['affiliate_url']}" class="btn-buy" rel="nofollow sponsored" target="_blank">Check Price →</a>
+          <a href="{p['affiliate_url']}" class="btn-buy" rel="nofollow sponsored" target="_blank">Check Price on {TIENDA[p['source']]} →</a>
         </div>
       </div>
     </div>"""
@@ -192,11 +221,11 @@ def gen_guide_html(g, products, css):
   <div class="prod-grid">
     {cards}
   </div>
-  <p style="font-size:.78rem;color:var(--text3);margin-top:18px">Ratings were taken from Amazon when each review was written. Prices change often during the holiday season, so check the current price on Amazon before buying.</p>
+  <p style="font-size:.78rem;color:var(--text3);margin-top:18px">Ratings were taken from Amazon when each review was written. Prices change often during the holiday season, so check the current price on {tiendas} before buying.</p>
 </section>
 </div>
 <footer>
-  <strong>Affiliate disclosure:</strong> TrendVortex.tech earns a commission from Amazon when you buy through our links, at no extra cost to you.<br>
+  <strong>Affiliate disclosure:</strong> TrendVortex.tech earns a commission from {tiendas} when you buy through our links, at no extra cost to you.<br>
   <span style="display:block;margin-top:.4rem">© {anio} TrendVortex.tech · <a href="{SITE_URL}">Home</a> · Updated {mes}</span>
 </footer>
 </body></html>"""
