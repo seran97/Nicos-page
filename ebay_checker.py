@@ -74,22 +74,25 @@ def _get_oauth_token() -> Optional[str]:
         return None
 
 
-# ── Link de afiliado rover ────────────────────────────────────────────────────
+# ── Link de afiliado EPN ──────────────────────────────────────────────────────
 
-def _rover_link(item_url: str) -> str:
+def epn_link(item_url: str) -> str:
     """
-    Convierte URL de eBay en link de afiliado usando EPN rover.
-    Solo necesita el SID (= campaign/publisher ID en el rover link).
+    Agrega los parámetros de seguimiento de EPN a una URL de eBay (item o búsqueda).
+    El formato viejo rover.ebay.com/rover/1/... ya no redirige (devuelve un GIF 1x1),
+    así que los clics no llegaban a eBay. EBAY_SID = campid de la campaña "default".
     """
     if not EBAY_SID:
         return item_url
-    encoded = quote_plus(item_url)
-    # Formato rover EPN estándar con SID como campid
+    item_url = item_url.split("?")[0] if "/itm/" in item_url else item_url
+    sep = "&" if "?" in item_url else "?"
     return (
-        f"https://rover.ebay.com/rover/1/711-53200-19255-0/1"
-        f"?campid={EBAY_SID}&toolid=10001&customid=trendvortex"
-        f"&mpre={encoded}"
+        f"{item_url}{sep}mkcid=1&mkrid=711-53200-19255-0&siteid=0"
+        f"&campid={EBAY_SID}&customid=trendvortex&toolid=10001&mkevt=1"
     )
+
+
+_rover_link = epn_link  # nombre viejo, por si otro script lo importa
 
 
 # ── Búsqueda con Browse API (OAuth2, requiere App ID + Cert ID) ──────────────
