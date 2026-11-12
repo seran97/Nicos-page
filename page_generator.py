@@ -309,6 +309,10 @@ def actualizar_sitemap():
     pages = [p for p in pages if p.parent != DOCS_DIR]
     # excluir páginas marcadas noindex (duplicados / baja calidad, ver noindex_paginas.json)
     pages = [p for p in pages if 'content="noindex' not in p.read_text(encoding="utf-8", errors="replace")[:2000]]
+    # excluir casi duplicados cuyo canonical apunta a la página principal de su familia (limpieza_2026-11-12.json)
+    pages = [p for p in pages if f'rel="canonical" href="{SITE_URL}/{p.parent.name}/"' in
+             p.read_text(encoding="utf-8", errors="replace")[:3000] or 'rel="canonical"' not in
+             p.read_text(encoding="utf-8", errors="replace")[:3000]]
 
     def lastmod(p: Path) -> str:
         return datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d")
