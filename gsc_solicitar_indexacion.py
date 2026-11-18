@@ -42,7 +42,7 @@ def solicitar(pg, url):
     boton.wait_for(state="visible", timeout=90000)
     pg.wait_for_timeout(2000)
     estado = pg.locator("body").inner_text()
-    if "La URL está en Google" in estado and "--forzar" not in sys.argv \n            and url not in json.loads(COLA.read_text(encoding="utf-8")).get("forzar", []):  # --forzar: pedir recrawl tras reescribir
+    if "La URL está en Google" in estado and "--forzar" not in sys.argv and url not in json.loads(COLA.read_text(encoding="utf-8")).get("forzar", []):  # --forzar: pedir recrawl tras reescribir
         return "ya_indexada"
     boton.click()
     # Google hace una prueba en vivo (1-2 min) y luego muestra el resultado en un diálogo
