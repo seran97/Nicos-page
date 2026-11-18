@@ -42,7 +42,7 @@ def solicitar(pg, url):
     boton.wait_for(state="visible", timeout=90000)
     pg.wait_for_timeout(2000)
     estado = pg.locator("body").inner_text()
-    if "La URL está en Google" in estado:
+    if "La URL está en Google" in estado and "--forzar" not in sys.argv \n            and url not in json.loads(COLA.read_text(encoding="utf-8")).get("forzar", []):  # --forzar: pedir recrawl tras reescribir
         return "ya_indexada"
     boton.click()
     # Google hace una prueba en vivo (1-2 min) y luego muestra el resultado en un diálogo
@@ -67,8 +67,12 @@ def main(maximo):
     cola = cargar()
     with sync_playwright() as p:
         ctx = p.chromium.connect_over_cdp(CDP).contexts[0]
-        pg = ctx.new_page()
-        pg.bring_to_front()
+        # Pestaña en segundo plano: new_page()/bring_to_front() restaurarían la ventana minimizada del bot
+        cdp = ctx.browser.new_browser_cdp_session()
+        with ctx.expect_page() as nueva:
+            cdp.send("Target.createTarget", {"url": "about:blank", "background": True})
+        pg = nueva.value
+        pg.set_viewport_size({"width": 1400, "height": 900})  # en ventana angosta se oculta el cuadro de inspección
         try:
             for url in list(cola["pendientes"])[:maximo]:
                 res = solicitar(pg, url)
