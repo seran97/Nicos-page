@@ -227,6 +227,7 @@ def gen_guide_html(g, products, css):
 <footer>
   <strong>Affiliate disclosure:</strong> TrendVortex.tech earns a commission from {tiendas} when you buy through our links, at no extra cost to you.<br>
   <span style="display:block;margin-top:.4rem">© {anio} TrendVortex.tech · <a href="{SITE_URL}">Home</a> · Updated {mes}</span>
+<nav class="tv-site-links" aria-label="Site" style="margin-top:.5rem;font-size:.8rem"><a href="/about.html">About</a> · <a href="/affiliate-disclosure.html">Affiliate Disclosure</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a></nav>
 </footer>
 </body></html>"""
 

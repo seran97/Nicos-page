@@ -274,6 +274,7 @@ footer a{{color:var(--text3)}}
   <span style="display:block;margin-top:.4rem">© {anio} TrendVortex.tech · <a href="{SITE_URL}">Home</a> ·
   <a href="/privacy-policy.html">Privacy Policy</a> · <a href="/legal-notice.html">Legal Notice</a> ·
   <a href="/terms-of-use.html">Terms of Use</a> · Updated {mes}</span>
+<nav class="tv-site-links" aria-label="Site" style="margin-top:.5rem;font-size:.8rem"><a href="/about.html">About</a> · <a href="/affiliate-disclosure.html">Affiliate Disclosure</a> · <a href="/contact.html">Contact</a> · <a href="/privacy-policy.html">Privacy Policy</a></nav>
 </footer>
 </body></html>"""
 
