@@ -124,8 +124,8 @@ pagina = f"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Best Running Sneakers 2026: 7 Picks for Every Runner | TrendVortex</title>
-<meta name="description" content="Best running and jogging sneakers for 2026 compared: Brooks Ghost 17, ASICS Nimbus 27, Hoka Clifton 10, Nike Pegasus 41, New Balance 880v15 and Saucony Ride 18, with drop, ratings and who should skip each.">
+<title>Best Running Sneakers 2026: 7 New Models Compared by Cushion and Drop | TrendVortex</title>
+<meta name="description" content="The best new running sneakers for 2026, compared side by side: Brooks Ghost 17, ASICS Nimbus 27, Hoka Clifton 10, Nike Pegasus 41, New Balance 880v15 and Saucony Ride 18, with drop, ratings and who should skip each.">
 <link rel="canonical" href="https://trendvortex.tech/best-running-sneakers/">
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -5,7 +5,7 @@ from construir import construir, fusionar
 F = "November 18, 2026"
 C = dict(
     slug="best-spf-50-face-sunscreen", fecha=F,
-    title="Best SPF 50 Sunscreen for Face 2026: 6 Picks by Skin Type | TrendVortex",
+    title="Best SPF 50 Sunscreen 2026: 6 Face Picks by Skin Type, Incl. No White Cast | TrendVortex",
     desc="Best SPF 50 face sunscreens compared by skin type: EltaMD UV Clear, La Roche-Posay Anthelios Mineral, Supergoop Unseen, ISDIN Eryfotona, CeraVe Mineral and Neutrogena Ultra Sheer, with filters, finish and who should skip each.",
     h1="Best SPF 50 Sunscreen for Face: 6 Picks by Skin Type",
     sub="The best face sunscreen is the one you will wear every day. We compared six popular high-SPF options by filter type, finish and skin type, using each listing's published ingredients and owner ratings.",

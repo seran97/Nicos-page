@@ -4,7 +4,7 @@ from construir import construir
 F = "November 18, 2026"
 C = dict(
     slug="best-skin-care-routine", fecha=F,
-    title="Best Skin Care Routine 2026: Simple Steps and Products by Skin Type | TrendVortex",
+    title="Best Skin Care Routine 2026: 4 Simple Steps + Products for Your Skin Type | TrendVortex",
     desc="A simple, dermatologist-style skin care routine for 2026: cleanser, serum, moisturizer and sunscreen, with product picks for oily, dry, sensitive and combination skin.",
     h1="Best Skin Care Routine for 2026: 4 Steps by Skin Type",
     sub="A good routine is short: cleanse, treat, moisturize, protect. Below is the order that works, what to change for your skin type and well-rated products for each step.",
