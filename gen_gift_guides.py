@@ -110,9 +110,95 @@ GUIDES = [
             ("best-under-armour-running-shoes", "An affordable, cushioned shoe for new runners and gym sessions.", "Under Armour Men's Charged Assert 11"),
         ],
     },
+    # 26-nov-2026: guías nuevas con productos de las páginas profundas (datos leídos en Amazon el 18-nov-2026)
+    {
+        "slug": "christmas-gifts-for-skincare-lovers",
+        "emoji": "🧴",
+        "title": "Christmas Gifts for Skincare Lovers",
+        "h1": "Skincare Gifts They Will Actually Use: Drugstore Favorites",
+        "desc": "Skincare Christmas gifts from CeraVe, Neutrogena, The Ordinary, Paula's Choice, TruSkin, EltaMD and Supergoop, each with tens of thousands of Amazon ratings and a note on which skin type it suits.",
+        "intro": "Skincare is a great gift when it matches the person's skin, and a drawer-filler when it does not. That is why every pick below is a well-known product with tens of thousands of owner ratings, and why each card says which skin type it suits. When in doubt, gentle basics (a cleanser, a moisturizer, a daily sunscreen) are the safest choice.",
+        "tips": [
+            "Not sure of their skin type? Pick fragrance-free basics like a gentle cleanser or moisturizer.",
+            "Actives like retinol, vitamin C and exfoliating acids are better for people who already use skincare regularly.",
+            "A daily sunscreen they like the feel of is one of the most useful skincare gifts you can give.",
+        ],
+        "items": [
+            {"slug": "best-skin-care-routine", "asin": "B07RL88DD2", "titulo": "CeraVe Hydrating Facial Cleanser", "rating": 4.7, "reviews": 133678, "cat": "Cleanser",
+             "motivo": "A gentle, fragrance-free cleanser for normal to dry skin; a safe pick for almost anyone."},
+            {"slug": "best-skin-care-routine", "asin": "B00NR1YQHM", "titulo": "Neutrogena Hydro Boost Water Gel", "rating": 4.6, "reviews": 88265, "cat": "Moisturizer",
+             "motivo": "A light gel moisturizer that oily and combination skin can wear without feeling greasy."},
+            {"slug": "best-skin-care-routine", "asin": "B00TTD9BRC", "titulo": "CeraVe Moisturizing Cream", "rating": 4.7, "reviews": 149766, "cat": "Moisturizer",
+             "motivo": "A rich cream for dry skin on the face and body, very welcome in winter."},
+            {"slug": "best-serum-face", "asin": "B0DDQ4MSXS", "titulo": "The Ordinary Niacinamide 10% + Zinc 1%", "rating": 4.7, "reviews": 71311, "cat": "Serum",
+             "motivo": "A low-cost serum for oily, blemish-prone skin and visible pores; a good stocking stuffer."},
+            {"slug": "best-serum-face", "asin": "B00949CTQQ", "titulo": "Paula's Choice 2% BHA Liquid Exfoliant", "rating": 4.5, "reviews": 117275, "cat": "Exfoliant",
+             "motivo": "A cult favorite for blackheads and rough texture, for people who already have a routine."},
+            {"slug": "best-serum-face", "asin": "B01M4MCUAF", "titulo": "TruSkin Vitamin C Serum", "rating": 4.4, "reviews": 157154, "cat": "Serum",
+             "motivo": "One of the most-rated vitamin C serums on Amazon (157,000+ ratings), for dull skin."},
+            {"slug": "best-spf-50-face-sunscreen", "asin": "B002MSN3QQ", "titulo": "EltaMD UV Clear SPF 46", "rating": 4.5, "reviews": 71448, "cat": "Sunscreen",
+             "motivo": "The face sunscreen dermatologists often suggest for acne-prone and red, sensitive skin."},
+            {"slug": "best-spf-50-face-sunscreen", "asin": "B0GQVB7LH6", "titulo": "Supergoop! Unseen Sunscreen SPF 50", "rating": 4.6, "reviews": 19855, "cat": "Sunscreen",
+             "motivo": "A clear gel that leaves no white cast on any skin tone and works as a makeup primer."},
+        ],
+    },
+    {
+        "slug": "christmas-gifts-for-home-cooks",
+        "emoji": "🍳",
+        "title": "Christmas Gifts for Home Cooks",
+        "h1": "Christmas Gifts for Home Cooks: Air Fryers and Kitchen Upgrades",
+        "desc": "Christmas gifts for home cooks: Ninja, COSORI, Instant Vortex and Chefman air fryers by household size, plus a Breville smart oven and a cold brew maker, from buyer ratings.",
+        "intro": "An air fryer is one of the few kitchen gifts that gets used every week: it reheats, roasts and crisps faster than an oven. The trick is the size. A 2-quart model is perfect for one person and useless for a family of five, so each pick below says how many people it feeds.",
+        "tips": [
+            "Rough sizing: 2 qt for one person, 4 to 5 qt for two or three, 6 qt or a dual basket for families.",
+            "Check counter space: larger and dual-basket models are wide.",
+            "If they already own an air fryer, a smart countertop oven or a cold brew maker is a better upgrade.",
+        ],
+        "items": [
+            {"slug": "best-air-fryer", "asin": "B07FDJMC9Q", "titulo": "Ninja AF101 Air Fryer (4 qt)", "rating": 4.7, "reviews": 59554, "cat": "Air fryer",
+             "motivo": "The best overall pick for two to three people: simple, fast and easy to clean."},
+            {"slug": "best-air-fryer", "asin": "B0CCJ8X596", "titulo": "COSORI Pro LE Air Fryer (5 qt)", "rating": 4.7, "reviews": 35901, "cat": "Air fryer",
+             "motivo": "A mid-size model with a PFAS-free ceramic-coated basket."},
+            {"slug": "best-air-fryer", "asin": "B07VHFMZHJ", "titulo": "Instant Vortex Plus Air Fryer (6 qt)", "rating": 4.5, "reviews": 81535, "cat": "Air fryer",
+             "motivo": "The most popular large basket for families."},
+            {"slug": "best-air-fryer", "asin": "B089TQWJKK", "titulo": "Ninja Foodi DualZone DZ201 (8 qt)", "rating": 4.8, "reviews": 25193, "cat": "Air fryer",
+             "motivo": "Two baskets cook a main and a side at the same time and finish together; great for meal prep."},
+            {"slug": "best-air-fryer", "asin": "B0DC11YH4J", "titulo": "Chefman 2-Quart Mini Air Fryer", "rating": 4.5, "reviews": 30250, "cat": "Air fryer",
+             "motivo": "A small, low-cost air fryer for one person, a dorm or a small apartment."},
+            ("best-breville-smart-oven-air-fryer", "A countertop oven that also air fries, for cooks who want one appliance instead of two.", "Breville Smart Oven Pro"),
+            ("best-iced-coffee-maker-machine", "A cold brew maker for coffee lovers who drink iced coffee all year.", "VINCI Cold Brew Coffee Maker"),
+        ],
+    },
+    {
+        "slug": "christmas-gifts-for-new-parents",
+        "emoji": "👶",
+        "title": "Christmas Gifts for New Parents",
+        "h1": "Christmas Gifts for New Parents: Baby Monitors and Everyday Helpers",
+        "desc": "Christmas gifts for new parents: Infant Optics, HelloBaby and VTech baby monitors, the Owlet Dream Sock, a lightweight travel stroller and toddler toys, with notes on who each one suits.",
+        "intro": "New parents need fewer cute outfits and more things that make nights and outings easier. A good baby monitor is the classic big gift; a light travel stroller and a toy that keeps a toddler busy are smaller ones that get used daily. Ask first: many parents already received a monitor at the baby shower.",
+        "tips": [
+            "No-WiFi monitors (Infant Optics, HelloBaby) are simpler and more private; WiFi ones add a phone app.",
+            "Sleep-tracking devices like the Owlet are not a substitute for safe sleep practices; check with the parents first.",
+            "Keep the gift receipt: duplicates are common with baby gear.",
+        ],
+        "items": [
+            {"slug": "best-baby-monitor", "asin": "B08FF4GV5C", "titulo": "Infant Optics DXR-8 Pro", "rating": 4.6, "reviews": 7180, "cat": "Baby monitor",
+             "motivo": "A no-WiFi monitor known for clear sound and privacy."},
+            {"slug": "best-baby-monitor", "asin": "B09GM8JZM9", "titulo": "HelloBaby HB6550 Baby Monitor", "rating": 4.5, "reviews": 19915, "cat": "Baby monitor",
+             "motivo": "The best-value no-WiFi monitor: simple to set up and easy on the budget."},
+            {"slug": "best-baby-monitor", "asin": "B07WCV632L", "titulo": "VTech Smart WiFi Baby Monitor", "rating": 4.1, "reviews": 7644, "cat": "Baby monitor",
+             "motivo": "A hybrid with a parent screen plus a phone app, for parents who want both."},
+            {"slug": "best-baby-monitor", "asin": "B09NCGQSY9", "titulo": "Owlet Dream Sock", "rating": 4.0, "reviews": 5437, "cat": "Sleep tracker",
+             "motivo": "For parents who specifically want sleep tracking; a big gift, so ask before buying."},
+            ("best-stroller-lightweight", "A light travel stroller that folds small, for car trips and flights over the holidays.", "Lightweight Travel Stroller"),
+            ("best-toddler-toys", "A light-up ramp toy that keeps toddlers busy, for families with an older sibling.", "Funwee 2-in-1 Rolling Ball and Car Ramp"),
+        ],
+    },
 ]
 
 TIENDA = {"amazon": "Amazon", "ebay": "eBay"}
+_IMG = Path(__file__).resolve().parent / "imagenes_asin.json"
+IMAGENES = json.loads(_IMG.read_text(encoding="utf-8")) if _IMG.exists() else {}
 
 
 # Some manifest categories are wrong (the board games page was filed under Pet Supplies)
@@ -123,7 +209,17 @@ def productos(items, manifest):
     """Merges each slug with its manifest data; skips missing pages and stores other than Amazon/eBay."""
     datos = {m["slug"]: m for m in manifest}
     out = []
-    for slug, motivo, *nombre in items:
+    for it in items:
+        if isinstance(it, dict):  # producto con datos verificados (páginas profundas): no depende del manifiesto
+            if not (DOCS_DIR / it["slug"] / "index.html").exists():
+                print(f"  SKIP {it['slug']} — page missing")
+                continue
+            img = re.sub(r"/images/W/[^/]+/images/", "/images/", IMAGENES.get(it["asin"], ""))
+            out.append({"slug": it["slug"], "source": "amazon", "titulo": it["titulo"], "rating": it["rating"],
+                        "reviews": it["reviews"], "imagen_url": img, "motivo": it["motivo"], "amazon_cat": it["cat"],
+                        "affiliate_url": f"https://www.amazon.com/dp/{it['asin']}?tag=trendvortex00-20"})
+            continue
+        slug, motivo, *nombre = it
         m = datos.get(slug)
         if not m or m.get("source") not in TIENDA or not (DOCS_DIR / slug / "index.html").exists():
             print(f"  SKIP {slug} — not in manifest, store not supported, or page missing")
@@ -183,6 +279,7 @@ def gen_guide_html(g, products, css):
 <title>{g['title']} {anio} | TrendVortex</title>
 <meta name="description" content="{g['desc']}">
 <link rel="canonical" href="{SITE_URL}/{g['slug']}/">
+<link rel="icon" href="/favicon.ico">
 <meta property="og:title" content="{g['title']} {anio} | TrendVortex">
 <meta property="og:description" content="{g['desc']}">
 <meta property="og:image" content="{products[0]['imagen_url']}">
